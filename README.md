@@ -1,7 +1,7 @@
 # BarbershopTwins 
 Es mi primer proyecto en el cual se encuentran leguajes como HTML, CSS y JAVASCRIPT 
 
-# ESTE PROYECTO NO ESTA TERMINADO
+*ESTE PROYECTO NO ESTA TERMINADO*
 
 Se planean añadir
 - Nuevas interfaces
