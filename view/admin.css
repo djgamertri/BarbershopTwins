@@ -38,7 +38,7 @@ html{
     width: 150px;
     text-decoration: none;
     display: inline-block;
-    margin: 0 10px; 
+    margin: 10px 10px; 
     padding: 12px 0;
     color: #fff;
     border: .5px solid #fff;
@@ -61,4 +61,9 @@ html{
 }
 .banner-btn a:hover{
     color: #000;
+}
+@media screen and (max-width: 770px){
+    .banner-text h1{
+        font-size: 60px;
+    }
 }

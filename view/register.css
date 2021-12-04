@@ -15,7 +15,7 @@ body{
     font-weight: 500;
 }
 .register{
-    width: 300px;
+    width: 250px;
     padding: 40px;
     position: absolute;
     top: 50%;
@@ -58,4 +58,9 @@ body{
 }
 .register input[type = "submit"]:hover{
     background: #00964b;
+}
+@media screen and (max-width: 770px){
+    body{
+        height: 110vh;
+    }
 }
