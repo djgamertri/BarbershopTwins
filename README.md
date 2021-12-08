@@ -1,4 +1,4 @@
-# # BarbershopTwins 
+# BarbershopTwins 
 
 Es mi primer proyecto en el cual se encuentran leguajes como HTML, CSS y JAVASCRIPT 
 
