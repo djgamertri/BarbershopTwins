@@ -10,14 +10,13 @@ if(isset($_GET["cerrar_sesion"])){
   session_destroy();
 }
 
-if(isset($_SESSION["rol"])){
-  switch($_SESSION["rol"]){
+if(isset($_SESSION["id_rol"])){
+  switch($_SESSION["id_rol"]){
       case 1:
-          header("location: ../view/dashboard.html");
+          header("location: ../view/dashboard.php");
       break;
-
       case 2:
-      header("location: ../view/admin.html");
+        header("location: ../view/admin.php");
       break;
       case 3:
         header("location: ../view/index.html");
@@ -26,7 +25,6 @@ if(isset($_SESSION["rol"])){
       default:
   }
 }
-
 
 $_SESSION["usuario"] = $username;
 
@@ -45,11 +43,10 @@ if($filas == true){
 
   switch($_SESSION["id_rol"]){
     case 1:
-        header("location: ../view/dashboard.html");
+        header("location: ../view/dashboard.php");
     break;
-
     case 2:
-    header("location: ../view/admin.html");
+      header("location: ../view/admin.php");    
     break;
     case 3:
       header("location: ../view/index.html");
