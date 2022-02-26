@@ -25,7 +25,7 @@ body{
     text-align: center;
     border-radius: 7px;
 }
-.login input[type = "text"],.login input[type = "password"]{
+.login input[type = "email"],.login input[type = "password"]{
     border: 0;
     background: none;
     display: block;
@@ -39,7 +39,7 @@ body{
     outline: none;
     transition: 0.25s;
 }
-.login input[type = "text"]:focus ,.login input[type = "password"]:focus{
+.login input[type = "email"]:focus ,.login input[type = "password"]:focus{
     width: 210px;
     border-color: #00964b;
 }

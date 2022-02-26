@@ -1,5 +1,5 @@
 <?php
-$username = $_POST["username"];
+$correo = $_POST["email"];
 $password = $_POST["password"];
 
 session_start();
@@ -30,7 +30,7 @@ $_SESSION["usuario"] = $username;
 
 $conex = mysqli_connect("127.0.0.1:3306", "root", "", "BarberShopTwins");
 
-$consulta = "SELECT*FROM usuario WHERE nombre='$username' and contraseña='$password' ";
+$consulta = "SELECT*FROM usuario WHERE correo='$correo' and contraseña='$password' ";
 $res = mysqli_query($conex, $consulta);
 
 $filas=mysqli_num_rows($res);
