@@ -1,9 +1,21 @@
+<?php
+
+session_start();
+
+if(isset($_GET["cerrar_sesion"])){
+    session_unset();
+    header("location: index.php");
+    session_destroy();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="https://cdn.icon-icons.com/icons2/197/PNG/128/scissors_24029.png" type="image/x-icon">
-    <link rel="stylesheet" href="index.css">
+    <link href='https://unpkg.com/boxicons@2.1.0/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="index_.css">
     <title>BarberShop</title>
 </head>
 <body>
@@ -22,13 +34,49 @@
 
     <div id="sideNav">
         <nav>
-            <ul>
-                <li><a href="#banner">INICIO</a></li>
-                <li><a href="#Conocenos">CONOCENOS</a></li>
-                <li><a href="#servicio">SERVICIO</a></li>
-                <li><a href="#footer">CONTACTANOS</a></li>
-                <li><a href="login.php">LOGIN</a></li>
-                <li><a href="register.html">REGISTER</a></li>
+            <ul><?php
+                if(empty($_SESSION["nombre"])){
+                ?>
+                <img src="img/logo.png" alt="barbershop logo" class="logo2">
+                <?php
+                }
+                if(!empty($_SESSION["nombre"])){
+                ?>
+                <img src="img\curry.jpg" alt="barbershop logo" class="logo_User">
+                <li class="user" ><a href=""></i><?php echo $_SESSION["nombre"]; ?> <br> <span> <?php echo $_SESSION["rol"];?> </span></a></li>
+                <?php
+                } 
+                ?>
+                <li><a href="#banner"><i class='bx bxs-home'></i> INICIO</a></li>
+                <?php
+                if(!empty($_SESSION["id_rol"])){
+                    if($_SESSION["id_rol"] != 3){
+                ?>
+                <li><a href="dashboard.php"><i class='bx bxs-dashboard'></i> DASHBOARD</a></li>
+                <?php
+                    }
+                }
+                ?>
+                <li><a href="#Conocenos"><i class='bx bxs-book-content' ></i> CONOCENOS</a></li>
+                <li><a href="#servicio"><i class='bx bx-store-alt' ></i> SERVICIO</a></li>
+                <li><a href="#footer"><i class='bx bxs-contact' ></i> CONTACTANOS</a></li>
+                <!--oculta o muestra el boton dependiendo de si existe una session-->
+                <?php
+                if(empty($_SESSION["nombre"])){
+                ?>
+                <li><a href="login.php"><i class='bx bxs-log-in-circle' ></i> LOGIN</a></li>
+                <li><a href="register.html"><i class='bx bx-log-in-circle' ></i> REGISTER</a></li>
+                <?php
+                }
+                ?>
+                <!--oculta o muestra el boton dependiendo de si existe una session-->
+                <?php
+                if(!empty($_SESSION["nombre"])){
+                ?>
+                <li class="Csesion1" ><a href="?cerrar_sesion=1"><i class='bx bx-log-out-circle' ></i> CERRAR SESION </a></li>
+                <?php
+                }
+                ?>
             </ul>
         </nav>
     </div>
@@ -109,12 +157,12 @@
         </div>
         <div class="footer-row">
             <div class="footer-left">
-                <h1>horario</h1>
+                <h1>Horario</h1>
                 <p>lunes a sabado - 9am a 9pm</p>
                 <p>domingos - 9am a 4pm</p>
             </div>
             <div class="footer-right">
-                <h1>local</h1>
+                <h1>Local</h1>
                 <p>Tv. 126b #132f18, Bogotá</p>
                 <p>barbershoptwins2@gmail.com</p>
                 <p>+57 301-380-0012</p>

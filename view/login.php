@@ -8,10 +8,10 @@ if(isset($_SESSION["id_rol"])){
             header("location: ../view/dashboard.php");
         break;
         case 2:
-          header("location: ../view/admin.php");
+            header("location: ../view/dashboard.php");
         break;
         case 3:
-          header("location: ../view/index.html");
+            header("location: ../view/index.php");
         break;
   
         default:

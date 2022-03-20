@@ -12,11 +12,53 @@ html{
     background-position: center;
     height: 100vh;
 }
+.Csesion1{
+    position: absolute;
+    color: #fff;
+    bottom: 0;
+    left: 0;
+    cursor: pointer;
+    width: 100%;
+    margin: 40px 25px;
+}
 .logo{
     width: 140px;
     position: absolute;
     top: 4%;
     left: 10%;
+}
+.logo2{
+    left: 1%;
+    width: 140px;
+    margin: 1px 20px;
+    padding-top: 30px;
+}
+.logo_User{
+    margin: 1px 20px;
+    width: 50%;
+    height: 120px;
+    float: left;
+    object-fit: cover;
+    border-radius: 100%;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    transform: translateX(45px);
+}
+.user{
+    background: #313343;
+    margin: auto;
+}
+.user a{
+    display: inline-block;
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    padding-bottom: 20px;
+    transform: translateX(50px);
+}
+.user a span{
+    color: #E3E3E3;
 }
 .banner-text{
     text-align: center;
@@ -97,15 +139,6 @@ nav ul li a{
     width: 20px;
     margin-top: 15px;
 }
-@media screen and (max-width: 770px){
-    .banner-text h1{
-       font-size: 44px; 
-    }
-    .banner-btn a{
-        display: block;
-        margin: 20px auto;
-    }
-}
 #Conocenos{
     width: 100%;
     padding: 70px 0;
@@ -179,20 +212,6 @@ nav ul li a{
     font-size: 30px;
     text-align: initial;
 }
-@media screen and (max-width: 770px){
-    .title-text h1{
-        font-size: 35px;
-    }
-    .Conocenos1{
-        flex-basis: 100%;
-    }
-    .Conocenos-img{
-        flex-basis: 100%;
-    }
-    .Conocenos-img img{
-        width: 100%;
-    }
-}
 #servicio{
     width: 100%;
     padding: 70px 0;
@@ -260,21 +279,6 @@ hr{
     bottom: 40%;
     opacity: 1;
 }
-@media screen and (max-width: 770px){
-    .servicio1{
-        flex-basis: 100%;
-        margin-bottom: 30px;
-    }
-    .servicio-desc p{
-        font-size: 12px;
-    }
-    hr{
-        margin: 5px auto;
-    }
-    .servicio1:hover .servicio-desc{
-        bottom: 25%;
-    }
-}
 #footer{
     padding: 100px 0 20px;
     position: relative;
@@ -325,6 +329,44 @@ hr{
     background: #009688;
     color: #fff;
     transform: translateY(-7px);
+}
+@media screen and (max-width: 770px){
+    .banner-text h1{
+       font-size: 44px; 
+    }
+    .banner-btn a{
+        display: block;
+        margin: 20px auto;
+    }
+}
+@media screen and (max-width: 770px){
+    .title-text h1{
+        font-size: 35px;
+    }
+    .Conocenos1{
+        flex-basis: 100%;
+    }
+    .Conocenos-img{
+        flex-basis: 100%;
+    }
+    .Conocenos-img img{
+        width: 100%;
+    }
+}
+@media screen and (max-width: 770px){
+    .servicio1{
+        flex-basis: 100%;
+        margin-bottom: 30px;
+    }
+    .servicio-desc p{
+        font-size: 12px;
+    }
+    hr{
+        margin: 5px auto;
+    }
+    .servicio1:hover .servicio-desc{
+        bottom: 25%;
+    }
 }
 @media screen and (max-width: 770px){
     .footer-left,.footer-right{

@@ -6,14 +6,14 @@ if(!isset($_SESSION["id_rol"])){
     header("location: login.php");
 }
 else{
-    if($_SESSION["id_rol"] != 1){
-        header("location: login.php");
+    if($_SESSION["id_rol"] == 3){
+        header("location: index.php");
     }
 }
 
 if(isset($_GET["cerrar_sesion"])){
     session_unset();
-  
+    header("location: index.php");
     session_destroy();
   }
 
@@ -30,47 +30,51 @@ if(isset($_GET["cerrar_sesion"])){
     <link rel="stylesheet" href="dashboard.css">
     <title>Dashboard</title>
 </head>
-<body>
+<body id="cuerpo">
     <div id="sideNav2">
         <nav>
             <ul>
-                <img src="img/logo.png" alt="barbershop logo" class="logo">
-                <li><a href="index.html"><i class='bx bxs-home'></i> INICIO</a></li>
-                <li><a href=""><i class='bx bxs-user-detail' ></i> USUARIOS</a></li>
-                <li><a href=""><i class='bx bxs-user-plus' ></i> AGREGAR</a></li>
-                <li><a href=""><i class='bx bxs-user-minus' ></i> ELIMINAR</a></li>
-                <div id="Csesion"><a href="dashboard.php?cerrar_sesion=1"><img src="img/salir.png" alt="log-out"></a></div>
+                <img src="img\curry.jpg" alt="barbershop logo" class="logo_User">
+                <li class="user" ><a href=""></i><?php echo $_SESSION["nombre"]; ?> <br> <span> <?php echo $_SESSION["rol"];?> </span></a></li>
+                <li><a href="index.php"><i class='bx bxs-home'></i> INICIO</a></li>
+                <li><a href="usuarios.php"><i class='bx bxs-user-detail' ></i> USUARIOS</a></li>
+                <li id="Csesion" ><a href="?cerrar_sesion=1"><i class='bx bx-log-out-circle' ></i> CERRAR SESION</a></li>
             </ul>
         </nav>
-    </div>
-    <div id="menuBtn2">
-        <img src="img/menu.png" id="menu2">
     </div>
     <section id="banner">
         <div class="banner-text">
             <h1>Bienvenido</h1>
-            <h1>Admin</h1>
-            <p></p>
+            <h1><?php echo $_SESSION["nombre"] ?></h1>
+            <p><?php echo $_SESSION["rol"] ?></p>
         </div>
     </section>
     <script>
-        // despliegue de menu izquierda
-        var menuBtn = document.getElementById("menuBtn2")
-        var sideNav = document.getElementById("sideNav2")
-        var menu = document.getElementById("menu2")
-        
-        sideNav.style.left = "-260px"
-        
-        menuBtn.onclick = function(){
-            if(sideNav.style.left == "-260px"){
-                sideNav.style.left = "0"
-                menu.src = "img/close.png"
-            }
+        const img0 = document.getElementById("cuerpo");
+
+        const LoadImage = (entradas, observador) => { 
+
+            entradas.forEach((entrada) => {
+                if(entrada.isIntersecting){
+                 entrada.target.classList.add("visible")
+                }
+
+            /* cuando ya no sea visible 
             else{
-                sideNav.style.left = "-260px"
-                menu.src = "img/menu.png"
-            }
+                 entrada.target.classList.remove("visible")
+                }
+                */
+       
+            });
         }
-</script>
+
+        const observador = new IntersectionObserver(LoadImage, {
+            root: null, 
+            rootMargin: "0px 0px 0px 0px",
+            threshold: 1.0
+        });
+
+        observador.observe(cuerpo);
+    </script>
 </body>
 </html>

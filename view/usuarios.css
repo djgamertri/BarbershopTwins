@@ -5,36 +5,7 @@
 }
 html{
     scroll-behavior: smooth;
-}
-#cuerpo{
-    opacity: 0;
-    transition: 0.60s;
-}
-#cuerpo.visible{
-    opacity: 1;
-}
-#banner{
-    background: linear-gradient(rgba(0, 0, 0, 0.24),#313343c9),url(img/banner.jpg);
-    background-size: cover;
-    background-position: center;
-    width: 87%;
-    float: right;
-    height: 100vh;
-}
-.banner-text{
-    text-align: center;
-    color: #fff;
-    padding-top: 180px;
-}
-.banner-text h1{
-    font-size: 130px;
-    padding: 7px;
-    color: #cfcfcf;
-    font-family: arial;
-}
-.banner-text p{
-    font-size: 20px;
-    font-style: italic;
+    background:#E3E3E3;
 }
 #sideNav2{
     width: 250px;
@@ -88,6 +59,18 @@ nav ul li a i{
 .user a span{
     color: #E3E3E3;
 }
+h1{
+    padding: 20px;
+    text-align: center;
+    margin-left: 10px;
+    font-size: 35px;
+    color: black;
+}
+.btn_crear{
+    width: 100px;
+    text-decoration: none;
+    color: #fff;
+}
 #Csesion{
     position: absolute;
     color: #fff;
@@ -96,4 +79,39 @@ nav ul li a i{
     cursor: pointer;
     width: 100%;
     margin: 40px 25px;
+}
+.table{
+    width: 87%;
+    float: right;
+}
+table{
+    border-collapse: collapse; 
+    font-size: 16px;
+    width: 100%;
+}
+table th{
+    text-align: left;
+    padding: 10pt;
+    background: #9A83C9;
+    color: #F0F0F0;
+}
+table tr:nth-child(odd){
+    background: #cfcfcf;
+}
+table tr{
+    background: #E3E3E3;
+}
+table td{
+    padding: 20px;
+    color: black;
+}
+.Edit{
+    color: #0BBDB7;
+    list-style: none;
+    text-decoration: none;
+}
+.Delete{
+    color: #db222a;
+    list-style: none;
+    text-decoration: none;
 }
