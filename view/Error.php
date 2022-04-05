@@ -101,6 +101,16 @@ session_start();
         <?php
         }
         ?>
+        <?php
+        if(!empty($_GET["error"] and $_GET["error"] == 7)){
+        ?>
+            <h1>Lo sentimos algo ha salido mal</h1>
+            <h1>:(</h1>
+            <p>No se puedo eliminar la reserva</p>
+            <p>Por favor intente de nuevo</p>
+        <?php
+        }
+        ?>
         </div>
     </section>
     <script>

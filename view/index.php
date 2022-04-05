@@ -42,8 +42,9 @@ if(isset($_GET["cerrar_sesion"])){
                 }
                 if(!empty($_SESSION["nombre"])){
                 ?>
-                <img src="img\curry.jpg" alt="barbershop logo" class="logo_User">
-                <li class="user" ><a href=""></i><?php echo $_SESSION["nombre"]; ?> <br> <span> <?php echo $_SESSION["rol"];?> </span></a></li>
+                <li class="user">
+                <img src= "<?php echo $_SESSION["imagen"]?>" alt="barbershop logo" class="logo_User"> 
+                <a href="Configuracion.php"></i><?php echo $_SESSION["nombre"]; ?> <br> <span> <?php echo $_SESSION["rol"];?> </span></a></li>
                 <?php
                 } 
                 ?>
@@ -55,6 +56,13 @@ if(isset($_GET["cerrar_sesion"])){
                 <li><a href="dashboard.php"><i class='bx bxs-dashboard'></i> DASHBOARD</a></li>
                 <?php
                     }
+                }
+                ?>
+                <?php
+                if(!empty($_SESSION["nombre"])){
+                ?>
+                <li><a href="productos.php"><i class='bx bxs-cart-add' ></i> RESERVAR</a></li>
+                <?php
                 }
                 ?>
                 <li><a href="#Conocenos"><i class='bx bxs-book-content' ></i> CONOCENOS</a></li>

@@ -34,10 +34,11 @@ if(isset($_GET["cerrar_sesion"])){
     <div id="sideNav2">
         <nav>
             <ul>
-                <img src="img\curry.jpg" alt="barbershop logo" class="logo_User">
-                <li class="user" ><a href=""></i><?php echo $_SESSION["nombre"]; ?> <br> <span> <?php echo $_SESSION["rol"];?> </span></a></li>
+                <img src="<?php echo $_SESSION["imagen"]?>" alt="barbershop logo" class="logo_User">
+                <li class="user" ><a href="Configuracion.php"></i><?php echo $_SESSION["nombre"]; ?> <br> <span> <?php echo $_SESSION["rol"];?> </span></a></li>
                 <li><a href="index.php"><i class='bx bxs-home'></i> INICIO</a></li>
                 <li><a href="usuarios.php"><i class='bx bxs-user-detail' ></i> USUARIOS</a></li>
+                <li><a href="reservas.php"><i class='bx bxs-book'></i> RESERVAS</a></li>
                 <li id="Csesion" ><a href="?cerrar_sesion=1"><i class='bx bx-log-out-circle' ></i> CERRAR SESION</a></li>
             </ul>
         </nav>
@@ -49,32 +50,5 @@ if(isset($_GET["cerrar_sesion"])){
             <p><?php echo $_SESSION["rol"] ?></p>
         </div>
     </section>
-    <script>
-        const img0 = document.getElementById("cuerpo");
-
-        const LoadImage = (entradas, observador) => { 
-
-            entradas.forEach((entrada) => {
-                if(entrada.isIntersecting){
-                 entrada.target.classList.add("visible")
-                }
-
-            /* cuando ya no sea visible 
-            else{
-                 entrada.target.classList.remove("visible")
-                }
-                */
-       
-            });
-        }
-
-        const observador = new IntersectionObserver(LoadImage, {
-            root: null, 
-            rootMargin: "0px 0px 0px 0px",
-            threshold: 1.0
-        });
-
-        observador.observe(cuerpo);
-    </script>
 </body>
 </html>

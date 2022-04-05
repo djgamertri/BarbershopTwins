@@ -1,8 +1,12 @@
 <?php
-$correo = $_POST["email"];
-$password = $_POST["password"];
 
 session_start();
+
+$conex = mysqli_connect("127.0.0.1:3306", "root", "", "BarberShopTwins");
+
+$correo = mysqli_real_escape_string($conex,$_POST["email"]);
+$password = mysqli_real_escape_string($conex,$_POST["password"]);
+
 
 if(isset($_GET["cerrar_sesion"])){
   session_unset();
@@ -26,8 +30,6 @@ if(isset($_SESSION["id_rol"])){
   }
 }
 
-$conex = mysqli_connect("127.0.0.1:3306", "root", "", "BarberShopTwins");
-
 $consulta = "SELECT*FROM usuario WHERE correo='$correo' and contraseña='$password' and Estado = 1 ";
 $res = mysqli_query($conex, $consulta);
 
@@ -35,7 +37,7 @@ $filas=mysqli_num_rows($res);
 
 if($filas == true){
 
-  $consultaS = mysqli_query($conex, "SELECT u.id, u.nombre, u.correo, u.contraseña, u.id_rol, r.rol FROM usuario u INNER JOIN roles r ON u.id_rol = r.id WHERE correo='$correo' AND Estado = 1");
+  $consultaS = mysqli_query($conex, "SELECT u.id, u.nombre, u.correo, u.contraseña, u.imagen, u.id_rol, r.rol FROM usuario u INNER JOIN roles r ON u.id_rol = r.id WHERE correo='$correo' AND Estado = 1");
   $resS = mysqli_num_rows($consultaS);
 
   if($resS == true){
@@ -44,8 +46,18 @@ if($filas == true){
   }
 
   $data = $res->fetch_assoc();
+  $_SESSION['id'] = $data["id"];
   $_SESSION['id_rol'] = $data["id_rol"];
   $_SESSION['nombre'] = $data["nombre"];
+  $_SESSION['correo'] = $data["correo"];
+  $_SESSION['contraseña'] = $data["contraseña"];
+  $_SESSION['imagen'] = $data["imagen"];
+
+  if(!empty($_SESSION["imagen"])){
+  }
+  else{
+    $_SESSION["imagen"] = "img\person.png";
+  }
 
   switch($_SESSION["id_rol"]){
     case 1:

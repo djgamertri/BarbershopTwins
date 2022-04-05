@@ -15,11 +15,12 @@ if(isset($_GET["cerrar_sesion"])){
     session_unset();
     header("location: login.php");
     session_destroy();
-  }
+}
 
 if(empty($_GET["id"])){
     header("location: usuarios.php");
 }
+
 $id_user = $_GET["id"];
 
 $conex = mysqli_connect("127.0.0.1:3306", "root", "", "BarberShopTwins");

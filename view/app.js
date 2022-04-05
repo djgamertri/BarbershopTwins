@@ -21,9 +21,9 @@ menuBtn.onclick = function(){
 
 const img0 = document.getElementById("imagen0");
 const img1 = document.getElementById("imagen1");
-const img2 = document.getElementById("imagen2")
-const img3 = document.getElementById("imagen3")
-const img4 = document.getElementById("imagen4")
+const img2 = document.getElementById("imagen2");
+const img3 = document.getElementById("imagen3");
+const img4 = document.getElementById("imagen4");
 
 const LoadImage = (entradas, observador) => { 
 

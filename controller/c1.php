@@ -1,9 +1,10 @@
 <?php
-$username = $_POST["username"];
-$email = $_POST["email"];
-$password = $_POST["password"];
 
 $conex = mysqli_connect("127.0.0.1:3306", "root", "", "BarberShopTwins");
+
+$username = mysqli_real_escape_string($conex, $_POST["username"]);
+$email = mysqli_real_escape_string($conex, $_POST["email"]);
+$password = mysqli_real_escape_string($conex, $_POST["password"]);
 
 $consulta = "SELECT*FROM usuario WHERE nombre = '$username' OR correo = '$email'";
 $res = mysqli_query($conex, $consulta);

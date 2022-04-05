@@ -6,13 +6,6 @@
 html{
     scroll-behavior: smooth;
 }
-#cuerpo{
-    opacity: 0;
-    transition: 0.60s;
-}
-#cuerpo.visible{
-    opacity: 1;
-}
 #banner{
     background: linear-gradient(rgba(0, 0, 0, 0.24),#313343c9),url(img/banner.jpg);
     background-size: cover;

@@ -9,48 +9,37 @@ body{
     background-position: center;
     height: 100vh;
 }
-.register .N1 {
-    border: 0;
-    background: none;
-    display: block;
-    margin: 20px auto;
-    text-align: center;
-    border: 2px solid #009688;
-    border-radius: 7px;
-    padding: 14px 10px;
-    width: 220px;
-    color: #fff;
-    outline: none;
-    transition: 0.25s;
-}
-.register .N1:focus {
-    width: 230px;
-    border-color: #00964b;
-}
-.register .N1 option{
-    color: black;
-}
-.register .N1 option:first-child {
-    display: none;
-}
-
-.register{
+.form{
     color: #ffff;
     text-transform: uppercase;
     font-weight: 500;
 }
-.register{
+.form{
     width: 250px;
     padding: 40px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    background: black;
+    background: #2c2c2c;
     text-align: center;
     border-radius: 7px;
 }
-.register input[type = "text"],.register input[type = "password"],.register input[type = "email"]{
+.form h1 span{
+    color: #E3E3E3;
+    padding: 10px;
+    border: 2px #9A83C9 dashed;
+}
+.form .logo_User{
+    width: 50%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 100%;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.form input[type = "email"],.form input[type = "password"],.form input[type = "text"]{
     border: 0;
     background: none;
     display: block;
@@ -64,14 +53,11 @@ body{
     outline: none;
     transition: 0.25s;
 }
-.register input[type = "text"]:invalid,.register input[type = "password"]:invalid,.register input[type = "email"]:invalid{
-    border: 2px solid red;
-}
-.register input[type = "text"]:focus ,.register input[type = "password"]:focus,.register input[type = "email"]:focus {
+.form input[type = "email"]:focus ,.form input[type = "password"]:focus ,.form input [type="text"]:focus{
     width: 210px;
     border-color: #00964b;
 }
-.register input[type = "submit"]{
+.form input[type = "submit"]{
     border: 0;
     background: none;
     display: block;
@@ -84,9 +70,10 @@ body{
     outline: none;
     transition: 0.25s;
 }
-.register input[type = "submit"]:hover{
+.form input[type = "submit"]:hover{
     background: #00964b;
 }
+
 @media screen and (max-width: 770px){
     body{
         height: 110vh;

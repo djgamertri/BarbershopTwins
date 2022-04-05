@@ -6,6 +6,10 @@ if($_POST["id"] == 1){
     header("location: ../view/index.php");
     exit;
 }
+if($_POST["id_rol"] == 1){
+    header("location: ../view/index.php");
+    exit;
+}
 
 $conex = mysqli_connect("127.0.0.1:3306", "root", "", "BarberShopTwins");
 

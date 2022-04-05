@@ -1,0 +1,157 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: arial;
+}
+body{
+    background: linear-gradient(rgba(0,0,0,0.5),#009688),url(img/banner.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    height: 100vh;
+}
+#sideNav{
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    right: -250px;
+    top: 0;
+    background: #009687;
+    z-index: 2;
+    transition: 0.5s;
+}
+nav ul li{
+    list-style: none;
+    margin: 50px 20px;
+}
+nav ul li a{
+    text-decoration: none;
+    color: #fff;
+}
+#menuBtn{
+    width: 50px;
+    height: 50px;
+    background: #009688;
+    text-align: center;
+    position: fixed;
+    right: 30px;
+    top: 20px;
+    border-radius: 3px;
+    z-index: 3;
+    border: 1px solid black;
+    cursor: pointer;
+}
+#menuBtn img{
+    width: 20px;
+    margin-top: 15px;
+}
+.Csesion1{
+    position: absolute;
+    color: #fff;
+    bottom: 0;
+    left: 0;
+    cursor: pointer;
+    width: 100%;
+    margin: 20px 25px;
+}
+.logo{
+    width: 140px;
+    position: absolute;
+    top: 4%;
+    left: 10%;
+}
+.logo2{
+    left: 1%;
+    width: 140px;
+    margin: 1px 20px;
+    padding-top: 30px;
+}
+.logo_User{
+    margin: 1px 20px;
+    width: 50%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.user{
+    background: #313343;
+    margin: auto;
+    text-align: center;
+}
+.user a{
+    display: inline-block;
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    padding-bottom: 20px;
+}
+.user a span{
+    color: #E3E3E3;
+}
+
+.titulo{
+    color: #fff;
+    text-align: center;
+    margin: 20px;
+}
+.carrito{
+    width: 100px;
+    transform: translate(27px, -66px);
+}
+.carrito .cart{
+    list-style: none;
+    text-decoration: none;
+    color: #fff;
+    font-size: 30px;
+}
+.servicio{
+    float: left;
+    width: 23%;
+    height: 510px;
+    padding: 40px;
+    color: #000;
+    margin: 10px 30px;
+    background: #fff;
+    text-align: center;
+    border-radius: 7px;
+    box-shadow: 0 0 7px #111;
+    align-items: center;
+}
+.servicio h1{
+    margin: 5px;
+    margin-top: 35%;
+    text-align: center;
+}
+.servicio p{
+    font-size: 20px;
+}
+.servicio .precio{
+    margin-top: 20px;
+}
+.servicio input[type="submit"]{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #00964b;
+    border-radius: 7px;
+    padding: 14px 40px;
+    color: #000;
+    outline: none;
+    transition: 0.25s;
+}
+.servicio input[type = "submit"]:hover{
+    cursor: pointer;
+    background: #00964b;
+    color: #fff;
+}
+#alerterror{
+    display: none;
+}
+#alerterror .visible{
+    display: block;
+}

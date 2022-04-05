@@ -15,7 +15,10 @@ if(isset($_GET["cerrar_sesion"])){
     session_unset();
     header("location: index.php");
     session_destroy();
-  }
+}
+if(isset($_GET["error"])){
+    echo "<script> alert('El Usuario no cuenta con ninguna reserva') </script>";
+}
 
 ?>
 
@@ -30,8 +33,8 @@ if(isset($_GET["cerrar_sesion"])){
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.0/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="usuarios.css">
-    <title>Usuarios</title>
+    <link rel="stylesheet" href="reservas.css">
+    <title>Reservas</title>
 </head>
 <body>
     <div id="sideNav2">
@@ -41,22 +44,23 @@ if(isset($_GET["cerrar_sesion"])){
                 <li class="user" ><a href="Configuracion.php"></i><?php echo $_SESSION["nombre"]; ?> <br> <span> <?php echo $_SESSION["rol"];?> </span></a></li>
                 <li><a href="index.php"><i class='bx bxs-home'></i> INICIO</a></li>
                 <li><a href="dashboard.php"><i class='bx bxs-dashboard'></i> DASHBOARD</a></li>
-                <li><a href="reservas.php"><i class='bx bxs-book'></i> RESERVAS</a></li>
+                <li><a href="usuarios.php"><i class='bx bxs-user-detail' ></i> USUARIOS</a></li>
                 <li><a href="register.html"><i class='bx bxs-user-plus'></i> AÑADIR USUARIOS</a></li>
                 <li id="Csesion" ><a href="?cerrar_sesion=1"><i class='bx bx-log-out-circle' ></i> CERRAR SESION</a></li>
             </ul>
         </nav>
     </div>
     </div>
+    <?php 
+    if(empty($_GET["id"])){
+    ?>
     <section class="table">
-    <h1>Lista de Usuarios</h1>
+    <h1>Consulta de reservas</h1>
         <table>
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
                 <th>Correo</th>
-                <th>Contraseña</th>
-                <th>Rol</th>
                 <th>Acciones</th>
             </tr>
             <?php
@@ -73,20 +77,8 @@ if(isset($_GET["cerrar_sesion"])){
                 <td> <?php echo $data["id"]?> </td>
                 <td> <?php echo $data["nombre"]?> </td>
                 <td> <?php echo $data["correo"]?> </td>
-                <td> <?php echo $data["contraseña"]?> </td>
-                <td> <?php echo $data["rol"]?> </td>
                 <td>
-                    <a class="Edit" href="Editar.php?id=<?php echo $data["id"]?>">Editar</a>
-                    <?php
-                     if($data["id"] != 1){
-
-                     
-                    ?>
-                    |
-                    <a class="Delete" href="Eliminar.php?id=<?php echo $data["id"]?>">Borrar</a>
-                    <?php
-                    }
-                    ?>
+                    <a class="reserva" href="reservas.php?id=<?php echo $data["id"]?>">Reservas</a>
                 </td>
             </tr>
     <?php
@@ -95,25 +87,54 @@ if(isset($_GET["cerrar_sesion"])){
      ?>
 
         </table>
-    </section><!---
-    <script>
-
-    var menuBtn = document.getElementById("menuBtn2")
-    var sideNav = document.getElementById("sideNav2")
-    var menu = document.getElementById("menu2")
-
-    sideNav.style.left = "-250px"
-
-    menuBtn.onclick = function(){
-        if(sideNav.style.left == "-250px"){
-            sideNav.style.left = "0"
-            menu.src = "img/close.png"
-        }
-        else{
-            sideNav.style.left = "-250px"
-            menu.src = "img/menu.png"
-        }
+    </section>
+    <?php 
     }
-    </script>-->
+    ?>
+    <?php 
+    if(!empty($_GET["id"])){
+        $id = $_GET["id"];
+    ?>
+    <section class="table">
+    <h1>Lista de Usuarios</h1>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Fecha Reserva</th>
+                <th>Acciones</th>
+            </tr>
+            <?php
+            
+            $conex = mysqli_connect("127.0.0.1:3306", "root", "", "BarberShopTwins");
+
+            $consulta= mysqli_query($conex, "SELECT r.id, u.nombre, s.nombre_s, r.Fecha FROM reserva r INNER join usuario u INNER join servicio s on u.id = r.id_user and s.id = r.id_servicio WHERE r.Estado = 1 AND u.id = $id ORDER BY u.nombre ASC");
+            $res = mysqli_num_rows($consulta);
+
+            if($res == true){
+                while ($data = mysqli_fetch_array($consulta)){
+            ?>
+            <tr>
+                <td> <?php echo $data["id"]?> </td>
+                <td> <?php echo $data["nombre"]?> </td>
+                <td> <?php echo $data["nombre_s"]?> </td>
+                <td> <?php echo $data["Fecha"]?> </td>
+                <td>
+                    <a class="Delete" href="Eliminar_reserva.php?id=<?php echo $data["id"]?>">Borrar</a>
+                </td>
+            </tr>
+    <?php
+           }
+         }else{
+            header("location: reservas.php?error");
+         }
+     ?>
+
+        </table>
+    </section>
+    <?php 
+    }
+    ?>
 </body>
 </html>

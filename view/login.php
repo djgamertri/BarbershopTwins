@@ -31,8 +31,8 @@ if(isset($_SESSION["id_rol"])){
 <body>
     <form class="login" action="../controller/c2.php" method="POST" autocomplete="off">
         <h1>Login</h1>
-        <input type="email" required="[A-Za-z0-9_-]" name="email" placeholder="Email">
-        <input type="password" required="[A-Za-z0-9_-]" name="password" placeholder="Password">
+        <input type="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email" placeholder="Email">
+        <input type="password" required pattern="[A-Za-z0-9_- ]{2,}" name="password" placeholder="Password">
         <input type="submit" name="" value="Login">
     </form>
 </body>
