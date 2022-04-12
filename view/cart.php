@@ -3,7 +3,7 @@
 session_start();
 
 if(!isset($_SESSION["id_rol"])){
-    header("location: login.php");
+    header("location: index.php");
 }
 
 if(!isset($_SESSION["cart"])){
@@ -24,6 +24,11 @@ if(!isset($_SESSION["cart"])){
     <title>Carrito</title>
 </head>
 <body>
+
+    <div id="c_loader">
+        <div id="loader"></div>
+    </div>
+
     <div class="titulo">
         <h1>Carrito de Compras</h1>
     </div>
@@ -74,5 +79,14 @@ if(!isset($_SESSION["cart"])){
         }
         ?>
     </div>
+
+    <script>
+    window.onload = function(){
+        var content = document.getElementById("c_loader");
+        content.style.visibility = "hidden";
+        content.style.opacity = "0";
+    }
+    </script>
+
 </body>
 </html>

@@ -2,7 +2,7 @@
 session_start();
 
 if(!isset($_SESSION["id_rol"])){
-    header("location: login.php");
+    header("location: index.php");
 }
 
 if(isset($_GET["cerrar_sesion"])){
@@ -22,6 +22,9 @@ if(isset($_GET["cerrar_sesion"])){
     <title>Configuracion</title>
 </head>
 <body>
+    <div id="c_loader">
+        <div id="loader"></div>
+    </div>
     <form class="form" action="../controller/c5.php" method="POST" autocomplete="off">
         <h1>Perfil</h1>
         <img src="<?php echo $_SESSION["imagen"]?>" alt="barbershop logo" class="logo_User">
@@ -36,5 +39,14 @@ if(isset($_GET["cerrar_sesion"])){
         }        
         ?>
     </form>
+    
+    <script>
+    window.onload = function(){
+        var content = document.getElementById("c_loader");
+        content.style.visibility = "hidden";
+        content.style.opacity = "0";
+    }
+    </script>
+
 </body>
 </html>

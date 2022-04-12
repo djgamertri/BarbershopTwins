@@ -11,7 +11,7 @@ CREATE TABLE usuario (
     nombre VARCHAR(100) NOT NULL,
     correo VARCHAR(200) NOT NULL,
     contraseña VARCHAR(100) NOT NULL,
-    imagen varchar(200) not null,
+    imagen varchar(200),
     Estado INT Default 1,
     id_rol INT Default 3,
     FOREIGN KEY (id_rol)
@@ -20,7 +20,7 @@ CREATE TABLE usuario (
 
 CREATE TABLE servicio (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    nombre VARCHAR(200) NOT NULL,
+    nombre_s VARCHAR(200) NOT NULL,
     descripcion VARCHAR(200) NOT NULL,
     precio INT NOT NULL
 );
@@ -45,7 +45,7 @@ IN password VARCHAR(100)
 
 insert into usuario (nombre, correo, contraseña) values (username, email, password);
 INSERT INTO roles (rol) VALUES ('Administrador'), ('Colaborador'), ('Usuario');
-INSERT INTO usuario (nombre, correo, contraseña, id_rol) VALUES ('Erick Rodriguez', 'dragonerick1@gmail.com', 'Codigo34', '1'), ('Axl Rodriguez', 'Bluaxl102@gmail.com', 'Creador34', '2');
+INSERT INTO usuario (nombre, correo, contraseña, id_rol) VALUES ('Erick Rodriguez', 'dragonerick1@gmail.com', 'Codigo34', '1'), ('Axl Rodriguez', 'Bluaxl102@gmail.com', 'Creador34', '2'), ('Laura Valentina', 'lauravalentina@gmail.com', 'Teamo :3', '1');
 
 SELECT u.id, u.nombre, u.correo, u.id_rol, r.rol FROM usuario u INNER JOIN roles r ON u.id_rol = r.id;
 SELECT u.id, u.nombre, u.correo, u.id_rol, r.rol FROM usuario u INNER JOIN roles r ON u.id_rol = r.id WHERE u.id = 4;

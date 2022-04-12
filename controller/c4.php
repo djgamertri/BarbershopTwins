@@ -18,7 +18,7 @@ $Inactivar = "UPDATE `usuario` SET `Estado` = '2' WHERE `usuario`.`id` = $id_use
 
 $res = mysqli_query($conex, $Inactivar);
     if($res){
-        header("location: ../view/usuarios.php");
+        header("Location: ".$_SERVER['HTTP_REFERER']."");
     }
     else{
         header("location: ../view/Error.php?error=5");

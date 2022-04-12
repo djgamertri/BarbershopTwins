@@ -3,11 +3,11 @@
 session_start();
 
 if(!isset($_SESSION["id_rol"])){
-    header("location: login.php");
+    header("location: index.php");
 }
 else{
     if($_SESSION["id_rol"] == 3){
-        header("location: login.php");
+        header("location: index.php");
     }
 }
 
@@ -34,9 +34,15 @@ if(isset($_GET["error"])){
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.0/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="reservas.css">
+    <script src="validar_r.js"></script>
     <title>Reservas</title>
 </head>
 <body>
+
+    <div id="c_loader">
+        <div id="loader"></div>
+    </div>
+
     <div id="sideNav2">
         <nav>
             <ul>
@@ -45,7 +51,7 @@ if(isset($_GET["error"])){
                 <li><a href="index.php"><i class='bx bxs-home'></i> INICIO</a></li>
                 <li><a href="dashboard.php"><i class='bx bxs-dashboard'></i> DASHBOARD</a></li>
                 <li><a href="usuarios.php"><i class='bx bxs-user-detail' ></i> USUARIOS</a></li>
-                <li><a href="register.html"><i class='bx bxs-user-plus'></i> AÑADIR USUARIOS</a></li>
+                <li><a href="#" class="register_btn"><i class='bx bxs-user-plus'></i> AÑADIR USUARIOS</a></li>
                 <li id="Csesion" ><a href="?cerrar_sesion=1"><i class='bx bx-log-out-circle' ></i> CERRAR SESION</a></li>
             </ul>
         </nav>
@@ -121,7 +127,7 @@ if(isset($_GET["error"])){
                 <td> <?php echo $data["nombre_s"]?> </td>
                 <td> <?php echo $data["Fecha"]?> </td>
                 <td>
-                    <a class="Delete" href="Eliminar_reserva.php?id=<?php echo $data["id"]?>">Borrar</a>
+                    <a class="Delete"  href="Eliminar_reserva.php?id=<?php echo $data["id"] ?>">Borrar</a>
                 </td>
             </tr>
     <?php
@@ -136,5 +142,31 @@ if(isset($_GET["error"])){
     <?php 
     }
     ?>
+
+    <section class="modal_register">
+        <div class="contenedor_modal">
+            <a href="#" id="close_modal_r" class="modal_close">X</a>
+            <br>
+            <form class="form" id="form" action="../controller/c1.php" method="POST" autocomplete="off" onsubmit="return validar_registro();">
+                <h1>Register</h1>
+                <input type="text" required id="user_r" name="username" placeholder="Username" >
+                <input type="email" required id="email_r" name="email" placeholder="Email"> 
+                <input type="password" required id="pass_r" name="password" placeholder="Password">
+                <input type="submit" id="boton_r" name="" value=Register>
+            </form>
+            <div id="warnings_r">
+                <p id="mensaje_r"></p>
+            </div>
+        </div>
+    </section>
+    
+    <script src="register.js"></script>
+    <script>
+    window.onload = function(){
+        var content = document.getElementById("c_loader");
+        content.style.visibility = "hidden";
+        content.style.opacity = "0";
+    }
+    </script>
 </body>
 </html>

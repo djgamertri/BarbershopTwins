@@ -14,6 +14,9 @@ session_start();
     <title>Error</title>
 </head>
 <body>
+    <div id="c_loader">
+        <div id="loader"></div>
+    </div>
     <div id="sideNav2">
         <nav>
             <ul>
@@ -130,6 +133,11 @@ session_start();
                 sideNav.style.left = "-260px"
                 menu.src = "img/menu.png"
             }
+        }
+        window.onload = function(){
+            var content = document.getElementById("c_loader");
+            content.style.visibility = "hidden";
+            content.style.opacity = "0";
         }
 </script>
 </body>

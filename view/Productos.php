@@ -3,7 +3,7 @@
 session_start();
 
 if(!isset($_SESSION["id_rol"])){
-    header("location: login.php");
+    header("location: index.php");
 }
 
 if(isset($_GET["error"])){
@@ -30,6 +30,10 @@ if(isset($_GET["not"])){
     <title>Servicio</title>
 </head>
 <body>
+
+    <div id="c_loader">
+        <div id="loader"></div>
+    </div>
 
     <div id="sideNav">
         <nav>
@@ -140,5 +144,12 @@ $conex = mysqli_connect("127.0.0.1:3306", "root", "", "BarberShopTwins");
                 }
 ?>
 <script src="app.js"></script>
+<script>
+    window.onload = function(){
+        var content = document.getElementById("c_loader");
+        content.style.visibility = "hidden";
+        content.style.opacity = "0";
+    }
+</script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 session_start();
 
 if(!isset($_SESSION["id_rol"])){
-    header("location: login.php");
+    header("location: index.php");
 }
 else{
     if($_SESSION["id_rol"] == 3){
@@ -31,6 +31,11 @@ if(isset($_GET["cerrar_sesion"])){
     <title>Dashboard</title>
 </head>
 <body id="cuerpo">
+
+    <div id="c_loader">
+        <div id="loader"></div>
+    </div>
+
     <div id="sideNav2">
         <nav>
             <ul>
@@ -50,5 +55,14 @@ if(isset($_GET["cerrar_sesion"])){
             <p><?php echo $_SESSION["rol"] ?></p>
         </div>
     </section>
+    
+    <script>
+    window.onload = function(){
+        var content = document.getElementById("c_loader");
+        content.style.visibility = "hidden";
+        content.style.opacity = "0";
+    }
+    </script>
+
 </body>
 </html>

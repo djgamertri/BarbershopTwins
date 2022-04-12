@@ -51,4 +51,13 @@ observador.observe(img0);
 observador.observe(img1); 
 observador.observe(img2);
 observador.observe(img3); 
-observador.observe(img4); 
+observador.observe(img4);
+
+
+// loader
+
+window.onload = function(){
+    var content = document.getElementById("c_loader");
+    content.style.visibility = "hidden";
+    content.style.opacity = "0";
+}

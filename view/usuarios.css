@@ -7,6 +7,45 @@ html{
     scroll-behavior: smooth;
     background:#E3E3E3;
 }
+
+/* loader */
+
+#c_loader{
+    background: rgba(250, 240, 245);
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    transition: all 1s ease;
+    z-index: 99999;
+}
+#loader{
+    border: 15px solid #ccc;
+    border-top-color: #9A83C9;
+    border-top-style: groove;
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    animation: girar 1.5s linear infinite;
+}
+@keyframes girar {
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+
+/* pagina */
+
 #sideNav2{
     width: 250px;
     height: 100vh;
@@ -115,4 +154,141 @@ table td{
     color: #db222a;
     list-style: none;
     text-decoration: none;
+}
+.modal_register{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    display: flex;
+    z-index: 99999;
+    pointer-events: none;
+    background: #111111bd;
+    transition: opacity .6s;
+
+}
+.modal_editar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    display: flex;
+    z-index: 99999;
+    pointer-events: none;
+    background: #111111bd;
+    transition: opacity .6s;
+}
+.modal_delete{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    display: flex;
+    z-index: 99999;
+    pointer-events: none;
+    background: #111111bd;
+    transition: opacity .6s;
+}
+.mostrar-modal{
+    opacity: 1;
+    pointer-events: unset;
+    transition: opacity .6s;
+}
+.contenedor_modal{
+    margin: auto;
+    width: 90%;
+    max-width: 410px;
+    max-height: 90%;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 5px 5px 5px 0.1px #161a1d;
+    padding: 2em;
+}
+.modal_close{
+    float: right;
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 20px;
+    background: #dc2f02;
+    border: 1px solid #dc2f02;
+    border-radius: 6px;
+
+}
+.form{
+    margin: 30px;
+}
+.form h1{
+    text-align: center;
+}
+.form input[type = "email"],.form input[type = "password"],.form input[type = "text"],.form select{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    font-size: 15px;
+    border-bottom: 2px solid #009688;
+    padding: 14px 10px;
+    width: 200px;
+    color: #000;
+    outline: none;
+    transition: 0.25s;
+}
+.form input[type = "email"]:focus ,.form input[type = "password"]:focus,.form input[type = "text"]:focus{
+    width: 210px;
+    border-color: #00964b;
+}
+.form input[type = "submit"]{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    font-size: 15px;
+    text-align: center;
+    border: 2px solid #80b918;
+    border-radius: 7px;
+    padding: 14px 40px;
+    color: #000;
+    outline: none;
+    transition: 0.5s;
+}
+.form input[type = "submit"]:hover{
+    background: #80b918;
+    color: #fff;
+}
+#warnings_r{
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    background: #dc2f02;
+    transition: 1s;
+}
+#warnings_r #mensaje_r{
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+    color: #fff;
+    transition: 1s;
+}
+.confirm{
+    padding: 4%;
+    margin: 6px;
+    text-align: center;
+    border-bottom: #d00000 1px solid;
+    border-top: #d00000 1px solid;
+}
+.parrafo{
+    text-transform: uppercase;
+    width: 100%;
+    padding: 4%;
+}
+.parrafo .span{
+    text-transform: initial;
+    color: #212529;
 }

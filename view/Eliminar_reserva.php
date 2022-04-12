@@ -42,7 +42,7 @@ if($filas == true){
     }
 }
 else{
-    header("location: usuarios.php");
+    header("location: reservas.php");
 }   
 
 
@@ -60,16 +60,38 @@ else{
     <title>Eliminar Usuario</title>
 </head>
 <body>
-    <div class="contenedor">
-        <h1>Eliminar reserva</h1>
-        <h2>¿Estás seguro de querer eliminar la reserva de este usuario?</h2>
-        <p>Usuario: <span><?php echo $nombre; ?></span> </p>
-        <p>servicio: <span><?php echo $servicio; ?></span> </p>
-        <a href="reservas.php">Cancelar</a>
-        <form action="../controller/c7.php" method="POST" autocomplete="off">
+
+    <div id="c_loader">
+        <div id="loader"></div>
+    </div>
+
+    <section class="modal_reserva">
+        <div class="contenedor_modal">
+            <a href="#" id="close_modal_reserva" class="modal_close">X</a>
+            <br>
+            <form class="form" action="../controller/c7.php" method="POST" autocomplete="off">
+            <h1>Eliminar reserva</h1>
+            <h2>¿Estás seguro de querer eliminar la reserva de este usuario?</h2>
+            <p>Usuario: <span><?php echo $nombre; ?></span> </p>
+            <p>servicio: <span><?php echo $servicio; ?></span> </p>
+            <a href="reservas.php">Cancelar</a>
             <input type="hidden" name="id" value="<?php echo $id_user; ?>">
             <input type="submit" value="Aceptar">
-        </form>
-    </div>
+            </form>
+
+            <div id="warnings_r">
+                <p id="mensaje_r"></p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+    window.onload = function(){
+        var content = document.getElementById("c_loader");
+        content.style.visibility = "hidden";
+        content.style.opacity = "0";
+    }
+    </script>
+
 </body>
 </html>

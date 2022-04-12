@@ -15,7 +15,7 @@ if($filas == FALSE){
     $registro = "INSERT INTO usuario (nombre, correo, contraseña) VALUES ('$username', '$email', '$password');";
     $insert = mysqli_query($conex, $registro);
     if($insert){
-        header("location: ../view/usuarios.php");
+        header("Location: ".$_SERVER['HTTP_REFERER']."");
     }
     else{
         header("location: ../view/Error.php?error=2");

@@ -26,14 +26,33 @@ if(isset($_SESSION["id_rol"])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="https://cdn.icon-icons.com/icons2/197/PNG/128/scissors_24029.png" type="image/x-icon">
     <link rel="stylesheet" href="login.css">
+    <script src="validar_l.js"></script>
     <title>Login</title>
 </head>
 <body>
-    <form class="login" action="../controller/c2.php" method="POST" autocomplete="off">
+
+    <div id="c_loader">
+        <div id="loader"></div>
+    </div>
+
+    <div id="warnings" >
+        <p id="mensaje"></p>
+    </div>
+
+    <form class="login" action="../controller/c2.php" method="POST" autocomplete="off" onsubmit="return validar();">
         <h1>Login</h1>
-        <input type="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email" placeholder="Email">
-        <input type="password" required pattern="[A-Za-z0-9_- ]{2,}" name="password" placeholder="Password">
-        <input type="submit" name="" value="Login">
+        <input type="email" required name="email" id="email" placeholder="Email">
+        <input type="password" required name="password" id="pass" placeholder="Password">
+        <input type="submit" name="" id="boton" value="Login">
     </form>
+
+    <script>
+    window.onload = function(){
+        var content = document.getElementById("c_loader");
+        content.style.visibility = "hidden";
+        content.style.opacity = "0";
+    }
+    </script>
+    
 </body>
 </html>

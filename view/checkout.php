@@ -4,7 +4,7 @@ session_start();
 
 if(isset($_GET["cerrar_sesion"])){
     session_unset();
-    header("location: login.php");
+    header("location: index.php");
     session_destroy();
 }
 
@@ -51,6 +51,11 @@ if(isset($_SESSION["cart"])){
     <title>Editar Usuario</title>
 </head>
 <body>
+
+    <div id="c_loader">
+        <div id="loader"></div>
+    </div>
+
     <div class="check">
         <i class='bx bxs-check-circle' id="check1"></i>
         <h1 class="text">Gracias por su reserva</h1>
@@ -58,5 +63,14 @@ if(isset($_SESSION["cart"])){
         <br>
         <a class="back" href="index.php">Volver a al Incio</a>
     </div>
+
+    <script>
+    window.onload = function(){
+        var content = document.getElementById("c_loader");
+        content.style.visibility = "hidden";
+        content.style.opacity = "0";
+    }
+    </script>
+
 </body>
 </html>
