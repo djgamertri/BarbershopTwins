@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 session_start();
 
@@ -20,7 +20,7 @@ if(!isset($_SESSION["cart"])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="https://cdn.icon-icons.com/icons2/197/PNG/128/scissors_24029.png" type="image/x-icon">
     <link href='https://unpkg.com/boxicons@2.1.0/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="./css/cart.css">
     <title>Carrito</title>
 </head>
 <body>

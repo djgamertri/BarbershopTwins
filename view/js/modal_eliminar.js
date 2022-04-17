@@ -10,13 +10,11 @@ var opcion_d = document.getElementById("rol_d");
         abrir_modal_d[i].onclick = function(e){
             e.preventDefault();
             var usuario = e.target.getAttribute("usuario");
-            console.log(usuario);
             var XHR = new XMLHttpRequest();
-            XHR.open("POST", "Eliminar.php", true);
+            XHR.open("POST", "../models/Eliminar.php", true);
             XHR.setRequestHeader("content-type","application/x-www-form-urlencoded");
             XHR.onreadystatechange = function(){
                var dato = JSON.parse(XHR.responseText);
-               console.log(this.response);
                dato.forEach( dato => {
                 id_user_d.value = dato.id_user_d;
                 user_d.innerText = dato.nombre_d;

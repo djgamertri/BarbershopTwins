@@ -1,29 +1,10 @@
-// despliegue de menu derecha
-
-var menuBtn = document.getElementById("menuBtn")
-var sideNav = document.getElementById("sideNav")
-var menu = document.getElementById("menu")
-
-sideNav.style.right = "-250px"
-
-menuBtn.onclick = function(){
-    if(sideNav.style.right == "-250px"){
-        sideNav.style.right = "0"
-        menu.src = "img/close.png"
-    }
-    else{
-        sideNav.style.right = "-250px"
-        menu.src = "img/menu.png"
-    }
-}
-
-//observer
-
 const img0 = document.getElementById("imagen0");
 const img1 = document.getElementById("imagen1");
 const img2 = document.getElementById("imagen2");
 const img3 = document.getElementById("imagen3");
 const img4 = document.getElementById("imagen4");
+
+// observer 
 
 const LoadImage = (entradas, observador) => { 
 
@@ -52,12 +33,3 @@ observador.observe(img1);
 observador.observe(img2);
 observador.observe(img3); 
 observador.observe(img4);
-
-
-// loader
-
-window.onload = function(){
-    var content = document.getElementById("c_loader");
-    content.style.visibility = "hidden";
-    content.style.opacity = "0";
-}

@@ -7,18 +7,12 @@ include("../controller/db.php");
 if(!isset($_SESSION["id_rol"])){
     header("location: index.php");
 }
-else{
-    if($_SESSION["id_rol"] == 3){
-        header("location: index.php");
-    }
-}
 
 if(isset($_GET["cerrar_sesion"])){
     session_unset();
     header("location: index.php");
     session_destroy();
-  }
-
+}
 ?>
 
 <!DOCTYPE html>
@@ -29,8 +23,8 @@ if(isset($_GET["cerrar_sesion"])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="https://cdn.icon-icons.com/icons2/197/PNG/128/scissors_24029.png" type="image/x-icon">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <link rel="stylesheet" href="./css/dashboard.css">
-    <title>Dashboard</title>
+    <link rel="stylesheet" href="./css/reservas.css">
+    <title>Mis Reservas</title>
 </head>
 <body>
     <div class="nav" id="nav">
@@ -39,11 +33,27 @@ if(isset($_GET["cerrar_sesion"])){
         </div>
         <div class="menu">
             <ul>
-                <li><a href="#" class="active" ><span><i class="las la-igloo"></i></span>dashboard</a></li>
+                <?php
+                if(!empty($_SESSION["id_rol"])){
+                    if($_SESSION["id_rol"] != 3){ 
+                ?>
+                <li><a href="dashboard.php"><span><i class="las la-igloo"></i></span>dashboard</a></li>
                 <li><a href="usuarios.php"><span><i class="las la-user"></i></span>usuarios</a></li>
-                <li><a href="reservas.php"><span><i class="las la-book"></i></span>reservas</a></li>
+                <?php
+                    }
+                } 
+                ?>
+                <li><a href="#" class="active" ><span><i class="las la-book"></i></span>reservas</a></li>
                 <li><a href="index.php"><span><i class="las la-home"></i></span>Inicio</a></li>
+                <?php
+                if(!empty($_SESSION["id_rol"])){
+                    if($_SESSION["id_rol"] != 3){ 
+                ?>
                 <li><a href="" class="register_btn" ><span><i class="las la-user-plus"></i></span>Agregar Usuario</a></li>
+                <?php
+                    }
+                } 
+                ?>
                 <li><a href="?cerrar_sesion=1"><span><i class="las la-sign-out-alt"></i></span>Cerrar Sesion</a></li>
             </ul>
         </div>
@@ -51,14 +61,14 @@ if(isset($_GET["cerrar_sesion"])){
     <div class="content" id="content">
         <header id="header">
             <h2>
-                <span id="btn"><i class="las la-bars"></i></span>
+                <label for="" id="btn"><span><i class="las la-bars"></i></span></label>
                 Dashboard
             </h2>
-            
+
             <h2>
                 <span id="dark"><i class="las la-moon"></i></span>
             </h2>
-            
+
             <div class="user" id="user">
                 <img class="img_user" src="<?php echo $_SESSION["imagen"]?>" alt="">
                 <div>
@@ -67,73 +77,50 @@ if(isset($_GET["cerrar_sesion"])){
                 </div>
             </div>
         </header>
+    <main>
+        <?php
+        if(!empty($_SESSION['id'])){
+            $id = $_SESSION['id'];
+        ?>
+        
+        <h1>Mis reservas</h1>
+        <div class="table">
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Servicio</th>
+                    <th>Fecha Reserva</th>
+                    <th>Acciones</th>
+                </tr>
+                <?php
 
-        <main>
-            <div class="content-card" id="content-card">
-                <div class="card">
-                    <?php 
+                $consulta= mysqli_query($conex, "SELECT r.id, u.nombre, s.nombre_s, r.Fecha FROM reserva r INNER join usuario u INNER join servicio s on u.id = r.id_user and s.id = r.id_servicio WHERE r.Estado = 1 AND u.id = $id ORDER BY u.nombre ASC");
+                $res = mysqli_num_rows($consulta);
 
-                    $consulta = "SELECT COUNT(*) FROM usuario";
-                    $res = mysqli_query($conex, $consulta);
-                    
-                    $filas = mysqli_num_rows($res);
-                    
-                    if($filas == true){
-                        $data = $res->fetch_assoc();
-                        $contador = $data["COUNT(*)"];
+                if($res == true){
+                    while ($data = mysqli_fetch_array($consulta)){ 
+                ?>
+                <tr>
+                    <td> <?php echo $data["id"]?> </td>
+                    <td> <?php echo $data["nombre"]?> </td>
+                    <td> <?php echo $data["nombre_s"]?> </td>
+                    <td> <?php echo $data["Fecha"]?> </td>
+                    <td>
+                        <a class="Delete" id="Delete" usuario="<?php echo $data["id"]?>" href="#">Borrar</a>
+                    </td>
+                </tr>
+                <?php
                     }
-                    ?>
-                    <div>
-                        <h1><?php echo $contador?></h1>
-                        <span>Usuarios</span>
-                    </div>
-                    <div>
-                        <span><i class="las la-user"></i></span>
-                    </div>
-                </div>
-                <div class="card">
-                <?php 
-
-                    $consulta = "SELECT COUNT(*) FROM reserva";
-                    $res = mysqli_query($conex, $consulta);
-                    
-                    $filas = mysqli_num_rows($res);
-                    
-                    if($filas == true){
-                        $data = $res->fetch_assoc();
-                        $contador = $data["COUNT(*)"];
-                    }
-                    ?>
-                    <div>
-                        <h1><?php echo $contador?></h1>
-                        <span>Reservas</span>
-                    </div>
-                    <div>
-                        <span><i class="las la-book"></i></span>
-                    </div>
-                </div>
-                <div class="card">
-                <?php 
-
-                    $consulta = "SELECT * FROM `usuario` WHERE id=(SELECT max(id) FROM `usuario`) and Estado = 1";
-                    $res = mysqli_query($conex, $consulta);
-                    
-                    $filas = mysqli_num_rows($res);
-                    
-                    if($filas == true){
-                        $data = $res->fetch_assoc();
-                        $nombre = $data["nombre"];
-                    }
-                    ?>
-                    <div>
-                        <h1><?php echo $nombre?></h1>
-                        <span>Ultimo usuario registrado</span>
-                    </div>
-                    <div>
-                        <span><i class="las la-user-check"></i></span>
-                    </div>
-                </div>
-            </div>
+                }else{
+                    echo "<h1 class='error' >No Cuentas con reservas Registradas</h1>";
+                }
+                ?>
+            </table>
+        </div>
+        <?php
+        }
+        ?>
 
         <section class="modal_config">
             <div class="contenedor_modal">
@@ -158,11 +145,29 @@ if(isset($_GET["cerrar_sesion"])){
             </div>
         </section>
 
+        <section class="modal_reserva">
+            <div class="contenedor_modal">
+                <a href="#" id="close_modal_reserva" class="modal_close">X</a>
+                <br>
+                <form class="form" action="../controller/c7.php" method="POST" autocomplete="off">
+                <h1>Eliminar reserva</h1>
+                <h2 class="confirm">¿Estás seguro de querer eliminar la reserva de este usuario?</h2>
+                <p class="parrafo" >Usuario: <span class="span" id="user_servicio"></span></p>
+                <p class="parrafo" >servicio: <span class="span" id="nombre_servicio"></span> </p>
+                <input type="hidden" name="id" id="id_servicio" value="">
+                <input type="submit" value="Aceptar">
+                </form>
+                <div id="warnings_r">
+                    <p id="mensaje_r"></p>
+                </div>
+            </div>
+        </section>
+
         <section class="modal_register">
             <div class="contenedor_modal">
                 <a href="#" id="close_modal_r" class="modal_close">X</a>
                 <br>
-                <form class="form" action="../controller/c1.php" method="POST" autocomplete="off" onsubmit="return validar_registro();">
+                <form class="form" id="form" action="../controller/c1.php" method="POST" autocomplete="off" onsubmit="return validar_registro();">
                     <h1>Register</h1>
                     <input type="text" required id="user_r" name="username" placeholder="Username" >
                     <input type="email" required id="email_r" name="email" placeholder="Email"> 
@@ -175,11 +180,11 @@ if(isset($_GET["cerrar_sesion"])){
             </div>
         </section>
 
-        </main>
-
+    </main>
     </div>
-    <script src="./js/config.js"></script>
     <script src="./js/register.js"></script>
+    <script src="./js/config.js"></script>
+    <script src="./js/modal_eliminar_r.js"></script>
     <script src="./js/app.js"></script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 
 session_start();
 
-$conex = mysqli_connect("127.0.0.1:3306", "root", "", "BarberShopTwins");
+include("../controller/db.php");
 
 $correo = mysqli_real_escape_string($conex,$_POST["email"]);
 $password = mysqli_real_escape_string($conex,$_POST["password"]);

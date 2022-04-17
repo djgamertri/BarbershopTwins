@@ -46,7 +46,7 @@ if(isset($_SESSION["cart"])){
 
         $_SESSION["cart"] = $carrito;
 
-        header("location: ../view/productos.php");
+        header("Location: ".$_SERVER['HTTP_REFERER']."");
     }
 
 }else{
@@ -67,7 +67,7 @@ if(isset($_SESSION["cart"])){
 
         $_SESSION["cart"] = $carrito;
 
-        header("location: ../view/productos.php");
+        header("Location: ".$_SERVER['HTTP_REFERER']."");
     }
 }
 

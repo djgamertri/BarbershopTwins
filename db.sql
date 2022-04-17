@@ -34,14 +34,9 @@ CREATE TABLE reserva (
     FOREIGN KEY (id_servicio)
         REFERENCES servicio (id),
 	Fecha datetime not null,
+    Fecha_r datetime not null,
 	Estado INT Default 1
 );
-
-CREATE PROCEDURE register (
-IN username VARCHAR(100), 
-IN email VARCHAR(200), 
-IN password VARCHAR(100)
-)
 
 insert into usuario (nombre, correo, contraseña) values (username, email, password);
 INSERT INTO roles (rol) VALUES ('Administrador'), ('Colaborador'), ('Usuario');

@@ -4,7 +4,7 @@
     font-family: arial;
 }
 body{
-    background: linear-gradient(rgba(0,0,0,0.5),#009688),url(img/banner.jpg);
+    background: linear-gradient(rgba(0,0,0,0.5),#009688),url(../img/banner.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;

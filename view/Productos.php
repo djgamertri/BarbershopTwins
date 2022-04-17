@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 session_start();
 
@@ -26,15 +26,10 @@ if(isset($_GET["not"])){
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.0/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="Productos.css">
+    <link rel="stylesheet" href="./css/Productos.css">
     <title>Servicio</title>
 </head>
 <body>
-
-    <div id="c_loader">
-        <div id="loader"></div>
-    </div>
-
     <div id="sideNav">
         <nav>
             <ul><?php

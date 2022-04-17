@@ -47,7 +47,7 @@ if(isset($_SESSION["cart"])){
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.0/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="checkout.css">
+    <link rel="stylesheet" href="./css/checkout.css">
     <title>Editar Usuario</title>
 </head>
 <body>

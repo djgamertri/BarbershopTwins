@@ -1,6 +1,6 @@
 <?php
 
-$conex = mysqli_connect("127.0.0.1:3306", "root", "", "BarberShopTwins");
+include("../controller/db.php");
 
 $username = mysqli_real_escape_string($conex, $_POST["username"]);
 $email = mysqli_real_escape_string($conex, $_POST["email"]);
