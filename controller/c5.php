@@ -4,10 +4,10 @@ session_start();
 
 include("../controller/db.php");
 
-$id_user = $_POST["id"];
-$username = $_POST["nombre"];
-$email = $_POST["email"];
-$password = $_POST["password"];
+$id_user = mysqli_real_escape_string($conex, $_POST["id"]);
+$username = mysqli_real_escape_string($conex, $_POST["nombre"]);
+$email = mysqli_real_escape_string($conex, $_POST["email"]);
+$password = mysqli_real_escape_string($conex, $_POST["password"]);
 
 $actualizar = "UPDATE `usuario` SET `nombre` = '$username', `correo` = '$email', contraseña = '$password' WHERE id = $id_user";
 $insert = mysqli_query($conex, $actualizar);

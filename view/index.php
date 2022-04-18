@@ -253,7 +253,9 @@ if(isset($_GET["cerrar_sesion"])){
     ?>
     
     </main>
-
+    
+    <script src="./js/validar_l.js"></script>
+    <script src="./js/validar_r.js"></script>
     <script src="./js/config.js"></script>
     <script src="./js/login.js"></script>
     <script src="./js/register.js"></script>

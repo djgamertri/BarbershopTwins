@@ -2,7 +2,7 @@
 
 include("../controller/db.php");
 
-$id_user = $_POST["id"];
+$id_user = mysqli_real_escape_string($conex, $_POST["id"]);
 
 if($_POST["id"] == 1){
     header("location: ../view/index.php");

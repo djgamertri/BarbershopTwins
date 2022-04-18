@@ -40,7 +40,7 @@ CREATE TABLE reserva (
 
 insert into usuario (nombre, correo, contraseña) values (username, email, password);
 INSERT INTO roles (rol) VALUES ('Administrador'), ('Colaborador'), ('Usuario');
-INSERT INTO usuario (nombre, correo, contraseña, id_rol) VALUES ('Erick Rodriguez', 'dragonerick1@gmail.com', 'Codigo34', '1'), ('Axl Rodriguez', 'Bluaxl102@gmail.com', 'Creador34', '2'), ('Laura Valentina', 'lauravalentina@gmail.com', 'Teamo :3', '1');
+INSERT INTO usuario (nombre, correo, contraseña, id_rol) VALUES ('Erick Rodriguez', 'dragonerick1@gmail.com', 'Codigo34', '1'), ('Axl Rodriguez', 'Bluaxl102@gmail.com', 'Creador34', '2'), ('Laura Valentina', 'lauravalentina@gmail.com', 'Contraseña', '1'), ('Fernando Villegas', 'correodeprueba@example.com', 'Contraseña', '3');
 
 SELECT u.id, u.nombre, u.correo, u.id_rol, r.rol FROM usuario u INNER JOIN roles r ON u.id_rol = r.id;
 SELECT u.id, u.nombre, u.correo, u.id_rol, r.rol FROM usuario u INNER JOIN roles r ON u.id_rol = r.id WHERE u.id = 4;

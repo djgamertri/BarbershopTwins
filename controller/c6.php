@@ -2,6 +2,8 @@
 
 session_start();
 
+include("../controller/db.php");
+
 if(isset($_GET["cart"])){
     unset($_SESSION["cart"]);
     unset($_SESSION["fecha"]);
@@ -30,10 +32,10 @@ if(isset($_SESSION["cart"])){
 
         //ingresa el nuevo servicio seleccionado
 
-        $id = $_GET["id"];
-        $nombre = $_POST["nombre"];
-        $descripcion = $_POST["descripcion"];
-        $precio = $_POST["precio"];
+        $id = mysqli_real_escape_string($conex, $_GET["id"]);
+        $nombre = mysqli_real_escape_string($conex, $_POST["nombre"]);
+        $descripcion = mysqli_real_escape_string($conex, $_POST["descripcion"]);
+        $precio = mysqli_real_escape_string($conex, $_POST["precio"]);
 
         $carritoNuevo = array(
             "id" => $id,
@@ -46,17 +48,17 @@ if(isset($_SESSION["cart"])){
 
         $_SESSION["cart"] = $carrito;
 
-        header("Location: ".$_SERVER['HTTP_REFERER']."");
+        header("Location: ../view/productos.php");
     }
 
 }else{
     if(isset($_GET["id"])){
         //si no tiene ningun servicio en el carrito crea un carrito 
 
-        $id = $_GET["id"];
-        $nombre = $_POST["nombre"];
-        $descripcion = $_POST["descripcion"];
-        $precio = $_POST["precio"];
+        $id = mysqli_real_escape_string($conex, $_GET["id"]);
+        $nombre = mysqli_real_escape_string($conex, $_POST["nombre"]);
+        $descripcion = mysqli_real_escape_string($conex, $_POST["descripcion"]);
+        $precio = mysqli_real_escape_string($conex, $_POST["precio"]);
 
         $carrito[] = array(
             "id" => $id,

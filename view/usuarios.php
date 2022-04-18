@@ -209,6 +209,8 @@ if(isset($_GET["cerrar_sesion"])){
 
         </main>
     </div>
+    
+    <script src="./js/validar_r.js"></script>
     <script src="./js/config.js"></script>
     <script src="./js/modal_eliminar.js"></script>
     <script src="./js/modal_editar.js"></script>

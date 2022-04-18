@@ -178,6 +178,8 @@ if(isset($_GET["cerrar_sesion"])){
         </main>
 
     </div>
+
+    <script src="./js/validar_r.js"></script>
     <script src="./js/config.js"></script>
     <script src="./js/register.js"></script>
     <script src="./js/app.js"></script>

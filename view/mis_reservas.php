@@ -39,11 +39,12 @@ if(isset($_GET["cerrar_sesion"])){
                 ?>
                 <li><a href="dashboard.php"><span><i class="las la-igloo"></i></span>dashboard</a></li>
                 <li><a href="usuarios.php"><span><i class="las la-user"></i></span>usuarios</a></li>
+                <li><a href="reservas.php" ><span><i class="las la-book"></i></span>reservas</a></li>
                 <?php
                     }
                 } 
                 ?>
-                <li><a href="#" class="active" ><span><i class="las la-book"></i></span>reservas</a></li>
+                <li><a href="#" class="active" ><span><i class="las la-book"></i></span>mis reservas</a></li>
                 <li><a href="index.php"><span><i class="las la-home"></i></span>Inicio</a></li>
                 <?php
                 if(!empty($_SESSION["id_rol"])){

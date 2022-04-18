@@ -2,12 +2,11 @@
 
 include("../controller/db.php");
 
-$id_user = $_POST["id"];
-$username = $_POST["username"];
-$email = $_POST["email"];
-$password = $_POST["password"];
-$rol = $_POST["Rol"];
-$vec = [$username, $email, $password, $rol];
+$id_user = mysqli_real_escape_string($conex, $_POST["id"]);
+$username = mysqli_real_escape_string($conex, $_POST["username"]);
+$email = mysqli_real_escape_string($conex, $_POST["email"]);
+$password = mysqli_real_escape_string($conex, $_POST["password"]);
+$rol = mysqli_real_escape_string($conex, $_POST["Rol"]);
 
 $actualizar = "UPDATE `usuario` SET `nombre` = '$username', `correo` = '$email', contraseña = '$password', id_rol = '$rol' WHERE id = $id_user";
 

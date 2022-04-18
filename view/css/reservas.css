@@ -361,6 +361,9 @@ table td{
 .dark .reserva {
     color: #a30c78;
 }
+.dark main .error{
+    color: red;
+}
 @media screen and (max-width: 1000px){
     .content-card{
         display: grid;

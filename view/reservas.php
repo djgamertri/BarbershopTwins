@@ -41,6 +41,7 @@ if(isset($_GET["cerrar_sesion"])){
                 <li><a href="dashboard.php"><span><i class="las la-igloo"></i></span>dashboard</a></li>
                 <li><a href="usuarios.php"><span><i class="las la-user"></i></span>usuarios</a></li>
                 <li><a href="#" class="active" ><span><i class="las la-book"></i></span>reservas</a></li>
+                <li><a href="mis_reservas.php"><span><i class="las la-book"></i></span>Mis reservas</a></li>
                 <li><a href="index.php"><span><i class="las la-home"></i></span>Inicio</a></li>
                 <li><a href="" class="register_btn" ><span><i class="las la-user-plus"></i></span>Agregar Usuario</a></li>
                 <li><a href="?cerrar_sesion=1"><span><i class="las la-sign-out-alt"></i></span>Cerrar Sesion</a></li>
@@ -210,6 +211,8 @@ if(isset($_GET["cerrar_sesion"])){
 
     </main>
     </div>
+
+    <script src="./js/validar_r.js"></script>
     <script src="./js/register.js"></script>
     <script src="./js/config.js"></script>
     <script src="./js/modal_eliminar_r.js"></script>
