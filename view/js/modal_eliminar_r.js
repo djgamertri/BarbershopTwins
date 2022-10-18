@@ -10,7 +10,7 @@ var nombre_servicio = document.getElementById("nombre_servicio");
             e.preventDefault();
             var usuario = e.target.getAttribute("usuario");
             var XHR = new XMLHttpRequest();
-            XHR.open("POST", "../models/Eliminar_reserva.php", true);
+            XHR.open("POST", "../controller/assets/Eliminar_reserva.php", true);
             XHR.setRequestHeader("content-type","application/x-www-form-urlencoded");
             XHR.onreadystatechange = function(){
                var dato = JSON.parse(XHR.responseText);

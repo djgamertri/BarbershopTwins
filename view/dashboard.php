@@ -42,6 +42,7 @@ if(isset($_GET["cerrar_sesion"])){
                 <li><a href="#" class="active" ><span><i class="las la-igloo"></i></span>dashboard</a></li>
                 <li><a href="usuarios.php"><span><i class="las la-user"></i></span>usuarios</a></li>
                 <li><a href="reservas.php"><span><i class="las la-book"></i></span>reservas</a></li>
+                <li><a href="mis_reservas.php"><span><i class="las la-book"></i></span>Mis reservas</a></li>
                 <li><a href="index.php"><span><i class="las la-home"></i></span>Inicio</a></li>
                 <li><a href="" class="register_btn" ><span><i class="las la-user-plus"></i></span>Agregar Usuario</a></li>
                 <li><a href="?cerrar_sesion=1"><span><i class="las la-sign-out-alt"></i></span>Cerrar Sesion</a></li>
@@ -73,7 +74,7 @@ if(isset($_GET["cerrar_sesion"])){
                 <div class="card">
                     <?php 
 
-                    $consulta = "SELECT COUNT(*) FROM usuario";
+                    $consulta = "SELECT COUNT(*) FROM usuario WHERE Estado = 1";
                     $res = mysqli_query($conex, $consulta);
                     
                     $filas = mysqli_num_rows($res);
@@ -94,7 +95,7 @@ if(isset($_GET["cerrar_sesion"])){
                 <div class="card">
                 <?php 
 
-                    $consulta = "SELECT COUNT(*) FROM reserva";
+                    $consulta = "SELECT COUNT(*) FROM reserva WHERE Estado = 1";
                     $res = mysqli_query($conex, $consulta);
                     
                     $filas = mysqli_num_rows($res);
@@ -115,7 +116,7 @@ if(isset($_GET["cerrar_sesion"])){
                 <div class="card">
                 <?php 
 
-                    $consulta = "SELECT * FROM `usuario` WHERE id=(SELECT max(id) FROM `usuario`) and Estado = 1";
+                    $consulta = "SELECT * FROM `usuario` WHERE id=(SELECT max(id) FROM `usuario` WHERE Estado = 1)";
                     $res = mysqli_query($conex, $consulta);
                     
                     $filas = mysqli_num_rows($res);
@@ -135,49 +136,16 @@ if(isset($_GET["cerrar_sesion"])){
                 </div>
             </div>
 
-        <section class="modal_config">
-            <div class="contenedor_modal">
-            <a href="#" id="close_modal_config" class="modal_close">X</a>
-            <form class="form" action="../controller/c5.php" method="POST" autocomplete="off">
-                <h1>Perfil</h1>
-                <img src="<?php echo $_SESSION["imagen"]?>" alt="barbershop logo" class="logo_User">
-                <input type="hidden" required="[A-Za-z0-9_-]" name="id" value="<?php echo $_SESSION["id"] ?>" >
-                <input type="text" required="[A-Za-z0-9_-]" name="nombre" value="<?php echo $_SESSION["nombre"] ?>" placeholder="Nombre">
-                <input type="email" required="[A-Za-z0-9_-]" name="email" value="<?php echo $_SESSION["correo"] ?>" placeholder="Email">
-                <input type="password" required="[A-Za-z0-9_-]" name="password" value="<?php echo $_SESSION["contraseña"] ?>" placeholder="Password">
-                <input type="submit" name="" value="Actualizar">
-                <?php 
-                if(!empty($_GET["Estado"])){
-                    echo "<h1><span>Actualizado</span></h1>";
-                }        
-                ?>
-            </form>
-                <div id="warnings_r">
-                    <p id="mensaje_r"></p>
-                </div>
-            </div>
-        </section>
-
-        <section class="modal_register">
-            <div class="contenedor_modal">
-                <a href="#" id="close_modal_r" class="modal_close">X</a>
-                <br>
-                <form class="form" action="../controller/c1.php" method="POST" autocomplete="off" onsubmit="return validar_registro();">
-                    <h1>Register</h1>
-                    <input type="text" required id="user_r" name="username" placeholder="Username" >
-                    <input type="email" required id="email_r" name="email" placeholder="Email"> 
-                    <input type="password" required id="pass_r" name="password" placeholder="Password">
-                    <input type="submit" id="boton_r" name="" value=Register>
-                </form>
-                <div id="warnings_r">
-                    <p id="mensaje_r"></p>
-                </div>
-            </div>
-        </section>
-
         </main>
 
     </div>
+    <?php 
+        
+        include_once "./assets/modal_register.php";
+        include_once "./assets/modal_config.php";
+        
+    ?>
+
 
     <script src="./js/validar_r.js"></script>
     <script src="./js/config.js"></script>

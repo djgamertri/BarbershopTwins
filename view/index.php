@@ -2,8 +2,6 @@
 
 session_start();
 
-include("../controller/db.php");
-
 if(isset($_GET["cerrar_sesion"])){
     session_unset();
     header("location: index.php");
@@ -65,8 +63,8 @@ if(isset($_GET["cerrar_sesion"])){
     </div>
     <div class="content" id="content">
         <header id="header">
-            <h2>
-                <span id="btn"><i class="las la-bars"></i></span>
+            <h2 id="btn">
+                <span ><i class="las la-bars"></i></span>
                 Inicio
             </h2>
             <?php
@@ -197,9 +195,9 @@ if(isset($_GET["cerrar_sesion"])){
             <h1>Perfil</h1>
             <img src="<?php echo $_SESSION["imagen"]?>" alt="barbershop logo" class="logo_User">
             <input type="hidden" required="[A-Za-z0-9_-]" name="id" value="<?php echo $_SESSION["id"] ?>" >
-            <input type="text" required="[A-Za-z0-9_-]" name="nombre" value="<?php echo $_SESSION["nombre"] ?>" placeholder="Nombre">
+            <input type="text" required="[A-Za-z0-9_-]" name="username" value="<?php echo $_SESSION["nombre"] ?>" placeholder="Nombre">
             <input type="email" required="[A-Za-z0-9_-]" name="email" value="<?php echo $_SESSION["correo"] ?>" placeholder="Email">
-            <input type="password" required="[A-Za-z0-9_-]" name="password" value="<?php echo $_SESSION["contraseña"] ?>" placeholder="Password">
+            <input type="password" required="[A-Za-z0-9_-]" name="password" value="" placeholder="Password">
             <input type="submit" name="" value="Actualizar">
             <?php 
             if(!empty($_GET["Estado"])){
@@ -215,40 +213,8 @@ if(isset($_GET["cerrar_sesion"])){
     <?php
     }
         if(empty($_SESSION["nombre"])){
-    ?>
-    <section class="modal_login">
-        <div class="contenedor_modal">
-            <a href="#" class="modal_close">X</a>
-            <br>
-            <form class="form" action="../controller/c2.php" method="POST" autocomplete="off" onsubmit="return validar();">
-                <h1>Login</h1>
-                <input type="email" required name="email" id="email" placeholder="Email">
-                <input type="password" required name="password" id="pass" placeholder="Password">
-                <input type="submit" name="" id="boton" value="Login">
-            </form>
-            <div id="warnings">
-                <p id="mensaje"></p>
-            </div>
-        </div>
-    </section>
-
-    <section class="modal_register">
-        <div class="contenedor_modal">
-            <a href="#" id="close_modal_r" class="modal_close">X</a>
-            <br>
-            <form class="form" id="form" action="../controller/c1.php" method="POST" autocomplete="off" onsubmit="return validar_registro();">
-                <h1>Register</h1>
-                <input type="text" required id="user_r" name="username" placeholder="Username" >
-                <input type="email" required id="email_r" name="email" placeholder="Email"> 
-                <input type="password" required id="pass_r" name="password" placeholder="Password">
-                <input type="submit" id="boton_r" name="" value=Register>
-            </form>
-            <div id="warnings_r">
-                <p id="mensaje_r"></p>
-            </div>
-        </div>
-    </section>
-    <?php
+            include_once "./assets/modal_register.php";
+            include_once "./assets/modal_login.php";
         }
     ?>
     

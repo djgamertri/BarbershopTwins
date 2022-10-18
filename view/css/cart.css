@@ -189,6 +189,9 @@ table td{
     background: #db222a;
     color: #fff;
 }
+.horario{
+    visibility: hidden;
+}
 .continue{
     text-decoration: none;
     text-align: center;

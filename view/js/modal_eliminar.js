@@ -11,7 +11,7 @@ var opcion_d = document.getElementById("rol_d");
             e.preventDefault();
             var usuario = e.target.getAttribute("usuario");
             var XHR = new XMLHttpRequest();
-            XHR.open("POST", "../models/Eliminar.php", true);
+            XHR.open("POST", "../controller/assets/Eliminar.php", true);
             XHR.setRequestHeader("content-type","application/x-www-form-urlencoded");
             XHR.onreadystatechange = function(){
                var dato = JSON.parse(XHR.responseText);

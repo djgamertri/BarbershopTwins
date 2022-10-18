@@ -2,32 +2,27 @@
 
 session_start();
 
-include("../controller/db.php");
+include_once "../models/Usuario.php";
 
-$id_user = mysqli_real_escape_string($conex, $_POST["id"]);
-$username = mysqli_real_escape_string($conex, $_POST["nombre"]);
-$email = mysqli_real_escape_string($conex, $_POST["email"]);
-$password = mysqli_real_escape_string($conex, $_POST["password"]);
+$funcion = new Usuario($_POST);
+$res = $funcion -> EditarUsuario();
 
-$actualizar = "UPDATE `usuario` SET `nombre` = '$username', `correo` = '$email', contraseña = '$password' WHERE id = $id_user";
-$insert = mysqli_query($conex, $actualizar);
+if($res===1){
+    $resS = $funcion -> validacionLogin();
 
-if($insert){
-    $consulta = "SELECT*FROM usuario WHERE correo='$email' and contraseña='$password' and Estado = 1 ";
-    $res = mysqli_query($conex, $consulta);
+    if(!empty($resS)){
 
-    $filas=mysqli_num_rows($res);
+        var_dump($resS);
+        $_SESSION['id'] = $resS[0]["id"];
+        $_SESSION['id_rol'] = $resS[0]["id_rol"];
+        $_SESSION['nombre'] = $resS[0]["nombre"];
+        $_SESSION['correo'] = $resS[0]["correo"];
+        $_SESSION['contraseña'] = $resS[0]["contraseña"];
 
-    if($filas == true){
         
-        $data = $res->fetch_assoc();
-        $_SESSION['id'] = $data["id"];
-        $_SESSION['id_rol'] = $data["id_rol"];
-        $_SESSION['nombre'] = $data["nombre"];
-        $_SESSION['correo'] = $data["correo"];
-        $_SESSION['contraseña'] = $data["contraseña"];
-        $_SESSION['imagen'] = $data["imagen"];
 
         header("Location: ".$_SERVER['HTTP_REFERER']."");
     }
+}else{
+    var_dump($resS);
 }

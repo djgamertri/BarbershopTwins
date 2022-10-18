@@ -118,13 +118,15 @@ if(isset($_GET["cerrar_sesion"])){
                 <tr>
                     <th>Id</th>
                     <th>Nombre</th>
+                    <th>Auxiliar</th>
                     <th>Servicio</th>
                     <th>Fecha Reserva</th>
+                    <th>Hora Reserva</th>
                     <th>Acciones</th>
                 </tr>
                 <?php
 
-                $consulta= mysqli_query($conex, "SELECT r.id, u.nombre, s.nombre_s, r.Fecha FROM reserva r INNER join usuario u INNER join servicio s on u.id = r.id_user and s.id = r.id_servicio WHERE r.Estado = 1 AND u.id = $id ORDER BY u.nombre ASC");
+                $consulta= mysqli_query($conex, "SELECT r.id, u.nombre, s.nombre_s, r.Fecha, r.Hora FROM reserva r INNER join usuario u INNER join servicio s on u.id = r.id_user and s.id = r.id_servicio WHERE r.Estado = 1 AND u.id = $id ORDER BY u.nombre ASC");
                 $res = mysqli_num_rows($consulta);
 
                 if($res == true){
@@ -133,8 +135,14 @@ if(isset($_GET["cerrar_sesion"])){
                 <tr>
                     <td> <?php echo $data["id"]?> </td>
                     <td> <?php echo $data["nombre"]?> </td>
+                    <?php 
+                    $consultaA = mysqli_query($conex, "SELECT u.nombre FROM reserva r INNER join usuario u on u.id = r.auxiliar WHERE r.Estado = 1 AND r.id = ".$data["id"]." ORDER BY u.nombre ASC;");
+                    $auxiliar = mysqli_fetch_array($consultaA);
+                    ?> 
+                    <td><?php echo $auxiliar["nombre"] ?></td>
                     <td> <?php echo $data["nombre_s"]?> </td>
                     <td> <?php echo $data["Fecha"]?> </td>
+                    <td> <?php if($data["Hora"] < 12){echo (int)(substr($data["Hora"], 0, 2))." AM";}else{echo (int)(substr($data["Hora"], 0, 2))." PM";}?> </td>
                     <td>
                         <a class="Delete" id="Delete" usuario="<?php echo $data["id"]?>" href="#">Borrar</a>
                     </td>
@@ -151,63 +159,15 @@ if(isset($_GET["cerrar_sesion"])){
         }
         ?>
 
-        <section class="modal_config">
-            <div class="contenedor_modal">
-            <a href="#" id="close_modal_config" class="modal_close">X</a>
-            <form class="form" action="../controller/c5.php" method="POST" autocomplete="off">
-                <h1>Perfil</h1>
-                <img src="<?php echo $_SESSION["imagen"]?>" alt="barbershop logo" class="logo_User">
-                <input type="hidden" required="[A-Za-z0-9_-]" name="id" value="<?php echo $_SESSION["id"] ?>" >
-                <input type="text" required="[A-Za-z0-9_-]" name="nombre" value="<?php echo $_SESSION["nombre"] ?>" placeholder="Nombre">
-                <input type="email" required="[A-Za-z0-9_-]" name="email" value="<?php echo $_SESSION["correo"] ?>" placeholder="Email">
-                <input type="password" required="[A-Za-z0-9_-]" name="password" value="<?php echo $_SESSION["contraseña"] ?>" placeholder="Password">
-                <input type="submit" name="" value="Actualizar">
-                <?php 
-                if(!empty($_GET["Estado"])){
-                    echo "<h1><span>Actualizado</span></h1>";
-                }        
-                ?>
-            </form>
-                <div id="warnings_r">
-                    <p id="mensaje_r"></p>
-                </div>
-            </div>
-        </section>
+        
 
-        <section class="modal_reserva">
-            <div class="contenedor_modal">
-                <a href="#" id="close_modal_reserva" class="modal_close">X</a>
-                <br>
-                <form class="form" action="../controller/c7.php" method="POST" autocomplete="off">
-                <h1>Eliminar reserva</h1>
-                <h2 class="confirm">¿Estás seguro de querer eliminar la reserva de este usuario?</h2>
-                <p class="parrafo" >Usuario: <span class="span" id="user_servicio"></span></p>
-                <p class="parrafo" >servicio: <span class="span" id="nombre_servicio"></span> </p>
-                <input type="hidden" name="id" id="id_servicio" value="">
-                <input type="submit" value="Aceptar">
-                </form>
-                <div id="warnings_r">
-                    <p id="mensaje_r"></p>
-                </div>
-            </div>
-        </section>
-
-        <section class="modal_register">
-            <div class="contenedor_modal">
-                <a href="#" id="close_modal_r" class="modal_close">X</a>
-                <br>
-                <form class="form" id="form" action="../controller/c1.php" method="POST" autocomplete="off" onsubmit="return validar_registro();">
-                    <h1>Register</h1>
-                    <input type="text" required id="user_r" name="username" placeholder="Username" >
-                    <input type="email" required id="email_r" name="email" placeholder="Email"> 
-                    <input type="password" required id="pass_r" name="password" placeholder="Password">
-                    <input type="submit" id="boton_r" name="" value=Register>
-                </form>
-                <div id="warnings_r">
-                    <p id="mensaje_r"></p>
-                </div>
-            </div>
-        </section>
+        <?php 
+        
+        include_once "./assets/modal_register.php";
+        include_once "./assets/modal_config.php";
+        include_once "./assets/modal_reserva.php";
+        
+        ?>
 
     </main>
     </div>

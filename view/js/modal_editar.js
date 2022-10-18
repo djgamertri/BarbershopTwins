@@ -12,7 +12,7 @@ var opcion_e = document.getElementById("opcion");
             e.preventDefault();
             var usuario = e.target.getAttribute("usuario");
             var XHR = new XMLHttpRequest();
-            XHR.open("POST", "../models/Editar.php", true);
+            XHR.open("POST", "../controller/assets/Editar.php", true);
             XHR.setRequestHeader("content-type","application/x-www-form-urlencoded");
             XHR.send("id_user=" + usuario);
             XHR.onreadystatechange = function(){
@@ -21,7 +21,7 @@ var opcion_e = document.getElementById("opcion");
                 id_user.value = data.id_user_e;
                 user_e.value = data.nombre_e;
                 email_e.value = data.correo_e;
-                pass_e.value = data.contraseña_e;
+                // pass_e.value = data.contraseña_e;
                 opcion_e.value = data.opcion;
                 opcion_e.innerText = data.rol_e;
                });

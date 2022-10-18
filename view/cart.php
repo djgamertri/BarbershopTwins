@@ -42,7 +42,7 @@ if(!isset($_SESSION["cart"])){
         </div>
         <div class="menu">
             <ul>
-            <li><a href="#banner"><span><i class="las la-home"></i></span>Inicio</a></li>
+            <li><a href="index.php#banner"><span><i class="las la-home"></i></span>Inicio</a></li>
                 <?php
                 if(!empty($_SESSION["id_rol"])){
                     if($_SESSION["id_rol"] != 3){
@@ -63,9 +63,7 @@ if(!isset($_SESSION["cart"])){
                 <?php
                 } 
                 ?>
-                <li><a href="#Conocenos"><span><i class="las la-address-book"></i></span>Conocenos</a></li>
-                <li><a href="#servicio"><span><i class="las la-book-reader"></i></span>Servicio</a></li>
-                <li><a href="#footer"><span><i class="las la-phone"></i></span>Contactanos</a></li>
+                <li><a href="index.php#footer"><span><i class="las la-phone"></i></span>Contactanos</a></li>
                 <?php
                 if(empty($_SESSION["nombre"])){
                 ?>
@@ -102,7 +100,7 @@ if(!isset($_SESSION["cart"])){
             </div>
         </header>
         <main>
-            <h1>Usuarios</h1>
+            <h1>Carrito</h1>
             <div class="table">
                 <table>
                     <tr>
@@ -146,7 +144,28 @@ if(!isset($_SESSION["cart"])){
                 if(!isset($_SESSION["fecha"])){
                 ?>
                 <form action="checkout.php?fecha" method="POST" class="fecha">
-                    <input type="datetime-local" name="fecha" class="date" required min="2022-03-01T00:00" max="2025-03-01T00:00">
+                    <input type="date" name="fecha" class="date" id="fecha" required onchange="obetenerfecha()" min="<?php echo date("Y-m-d") ?>" max="2025-03-01">
+                    <select name="Hora" id="horario" class="horario" required ></select>
+                    
+                    <?php
+                        $consulta = "SELECT * FROM usuario where id_rol = 2";
+                        $res = mysqli_query($conex, $consulta);
+
+                        $filas = mysqli_num_rows($res);
+                    ?>
+
+                    <select name="auxiliar" id="auxiliar" class="N1" onchange="obetenerfecha()">
+
+                    <?php
+                        if($filas > 0){
+                            while ($auxiliar = mysqli_fetch_array($res)){
+                    ?>
+                        <option value="<?php echo $auxiliar["id"];?>"> <?php echo $auxiliar["nombre"] ?> </option>
+                    <?php
+                            }
+                        }
+                    ?>
+                    </select>
                     <input type="submit" class="continue" name="" value="Reservar">
                 </form>
                 <?php
@@ -154,33 +173,18 @@ if(!isset($_SESSION["cart"])){
                 ?>
             </div>
 
-        <section class="modal_config">
-            <div class="contenedor_modal">
-            <a href="#" id="close_modal_config" class="modal_close">X</a>
-            <form class="form" action="../controller/c5.php" method="POST" autocomplete="off">
-                <h1>Perfil</h1>
-                <img src="<?php echo $_SESSION["imagen"]?>" alt="barbershop logo" class="logo_User">
-                <input type="hidden" required="[A-Za-z0-9_-]" name="id" value="<?php echo $_SESSION["id"] ?>" >
-                <input type="text" required="[A-Za-z0-9_-]" name="nombre" value="<?php echo $_SESSION["nombre"] ?>" placeholder="Nombre">
-                <input type="email" required="[A-Za-z0-9_-]" name="email" value="<?php echo $_SESSION["correo"] ?>" placeholder="Email">
-                <input type="password" required="[A-Za-z0-9_-]" name="password" value="<?php echo $_SESSION["contraseña"] ?>" placeholder="Password">
-                <input type="submit" name="" value="Actualizar">
-                <?php 
-                if(!empty($_GET["Estado"])){
-                    echo "<h1><span>Actualizado</span></h1>";
-                }        
-                ?>
-            </form>
-                <div id="warnings_r">
-                    <p id="mensaje_r"></p>
-                </div>
-            </div>
-        </section>
+        <?php 
+        
+        include_once "./assets/modal_config.php";
+        
+        ?>
 
         </main>
     </div>
     
+
     <script src="./js/config.js"></script>
     <script src="./js/app.js"></script>
+    <script src="./js/cart.js"></script>
 </body>
 </html>

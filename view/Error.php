@@ -68,7 +68,7 @@
         ?>
         <div class="container">
             <img src="../view/img/alert.svg" alt="">
-            <h1>Usuario Ya existente</h1>
+            <h1>Usuario ya existe</h1>
         </div>
         <?php
         }

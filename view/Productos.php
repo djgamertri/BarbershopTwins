@@ -44,20 +44,14 @@ if(isset($_GET["cerrar_sesion"])){
                 <li><a href="dashboard.php"><span><i class="las la-igloo"></i></span>Dashboard</a></li>
                 <?php 
                     }
-                ?>
-                <li><a href="cart.php"><span><i class="las la-shopping-cart"></i></span>Carrito (<?php if(isset($_SESSION["cart"])){ $carrito = $_SESSION["cart"]; echo count($carrito); }else echo "0";  ?>)</a></li>
-                <?php
                 }
                 ?>
-                
+                <li><a href="cart.php"><span><i class="las la-shopping-cart"></i></span>Carrito (<?php if(isset($_SESSION["cart"])){ $carrito = $_SESSION["cart"]; echo count($carrito); }else echo "0";  ?>)</a></li>     
                 <li><a href="productos.php" class="active"><span><i class="las la-cart-plus"></i></span>Reservar</a></li>
                 <li><a href="mis_reservas.php"><span><i class="las la-book"></i></span>Mis reservas</a></li>
                 <?php
                 } 
                 ?>
-                <li><a href="#Conocenos"><span><i class="las la-address-book"></i></span>Conocenos</a></li>
-                <li><a href="#servicio"><span><i class="las la-book-reader"></i></span>Servicio</a></li>
-                <li><a href="#footer"><span><i class="las la-phone"></i></span>Contactanos</a></li>
                 <?php
                 if(empty($_SESSION["nombre"])){
                 ?>
@@ -78,7 +72,7 @@ if(isset($_GET["cerrar_sesion"])){
         <header id="header">
             <h2>
                 <span id="btn"><i class="las la-bars"></i></span>
-                Productos
+                Servicios
             </h2>
             
             <h2>
@@ -140,9 +134,9 @@ if(isset($_GET["cerrar_sesion"])){
                 <h1>Perfil</h1>
                 <img src="<?php echo $_SESSION["imagen"]?>" alt="barbershop logo" class="logo_User">
                 <input type="hidden" required="[A-Za-z0-9_-]" name="id" value="<?php echo $_SESSION["id"] ?>" >
-                <input type="text" required="[A-Za-z0-9_-]" name="nombre" value="<?php echo $_SESSION["nombre"] ?>" placeholder="Nombre">
+                <input type="text" required="[A-Za-z0-9_-]" name="username" value="<?php echo $_SESSION["nombre"] ?>" placeholder="Nombre">
                 <input type="email" required="[A-Za-z0-9_-]" name="email" value="<?php echo $_SESSION["correo"] ?>" placeholder="Email">
-                <input type="password" required="[A-Za-z0-9_-]" name="password" value="<?php echo $_SESSION["contraseña"] ?>" placeholder="Password">
+                <input type="password" required="[A-Za-z0-9_-]" name="password" value="" placeholder="Password">
                 <input type="submit" name="" value="Actualizar">
                 <?php 
                 if(!empty($_GET["Estado"])){

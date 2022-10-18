@@ -20,12 +20,14 @@ if(isset($_SESSION["cart"])){
     $id_user = $_SESSION['id'];
     $nombre =  $_SESSION['nombre'];
     $fecha_r = date("Y-m-d H:i:s");
+    $hora = $_POST["Hora"].":00";
+    $auxiliar = $_POST["auxiliar"];
 
     $carrito = $_SESSION["cart"];
 
     for($i=0; $i<count($carrito); $i++){
         $conex = mysqli_connect("127.0.0.1:3306", "root", "", "BarberShopTwins");
-        $insertar = mysqli_query($conex, "INSERT INTO reserva ( id_user, id_servicio, Fecha, Fecha_r) VALUES ( $id_user , ".$carrito[$i]["id"]." , '$fecha' , '$fecha_r'  )");
+        $insertar = mysqli_query($conex, "INSERT INTO reserva ( id_user, id_servicio, auxiliar, Fecha, Hora, Fecha_r) VALUES ( $id_user , ".$carrito[$i]["id"].", $auxiliar , '$fecha' , '$hora' , '$fecha_r'  )");
         if($insertar){
             unset($_SESSION["cart"]);
             unset($_SESSION["fecha"]);

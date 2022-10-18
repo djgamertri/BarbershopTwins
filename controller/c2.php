@@ -2,10 +2,7 @@
 
 session_start();
 
-include("../controller/db.php");
-
-$correo = mysqli_real_escape_string($conex,$_POST["email"]);
-$password = mysqli_real_escape_string($conex,$_POST["password"]);
+include_once "../models/Usuario.php";
 
 
 if(isset($_GET["cerrar_sesion"])){
@@ -30,53 +27,50 @@ if(isset($_SESSION["id_rol"])){
   }
 }
 
-$consulta = "SELECT*FROM usuario WHERE correo='$correo' and contraseña='$password' and Estado = 1 ";
-$res = mysqli_query($conex, $consulta);
 
-$filas=mysqli_num_rows($res);
+$funcion = new Usuario($_POST);
+$res = $funcion -> validacionLogin();
 
-if($filas == true){
+if(!empty($res)){
 
-  $consultaS = mysqli_query($conex, "SELECT u.id, u.nombre, u.correo, u.contraseña, u.imagen, u.id_rol, r.rol FROM usuario u INNER JOIN roles r ON u.id_rol = r.id WHERE correo='$correo' AND Estado = 1");
-  $resS = mysqli_num_rows($consultaS);
+
+  $resS = $funcion -> ConsultaRoles();
+
+  var_dump($resS);
 
   if($resS == true){
-    $datas = mysqli_fetch_array($consultaS);
-    $_SESSION["rol"] = $datas["rol"];
+    $_SESSION["rol"] = $resS[0]["rol"];
+    $_SESSION['id'] = $resS[0]["id"];
+    $_SESSION['id_rol'] = $resS[0]["id_rol"];
+    $_SESSION['nombre'] = $resS[0]["nombre"];
+    $_SESSION['correo'] = $resS[0]["correo"];
+    $_SESSION['contraseña'] = $resS[0]["contraseña"];
+    $_SESSION['imagen'] = $resS[0]["imagen"];
+  
+    
+    if(!empty($_SESSION["imagen"])){
+    }
+    else{
+      $_SESSION["imagen"] = "img\person.png";
+    }
+
+    switch($_SESSION["id_rol"]){
+      case 1:
+        header("location: ../view/index.php");
+      break;
+      case 2:
+        header("location: ../view/index.php");    
+      break;
+      case 3:
+        header("location: ../view/index.php");
+      break;
+
+      default:
+    }
   }
-
-  $data = $res->fetch_assoc();
-  $_SESSION['id'] = $data["id"];
-  $_SESSION['id_rol'] = $data["id_rol"];
-  $_SESSION['nombre'] = $data["nombre"];
-  $_SESSION['correo'] = $data["correo"];
-  $_SESSION['contraseña'] = $data["contraseña"];
-  $_SESSION['imagen'] = $data["imagen"];
-
-  if(!empty($_SESSION["imagen"])){
-  }
-  else{
-    $_SESSION["imagen"] = "img\person.png";
-  }
-
-  switch($_SESSION["id_rol"]){
-    case 1:
-      header("location: ../view/index.php");
-    break;
-    case 2:
-      header("location: ../view/index.php");    
-    break;
-    case 3:
-      header("location: ../view/index.php");
-    break;
-
-    default:
-}
-
 }
 else{
   header("location: ../view/Error.php?error=1");
 }
-mysqli_free_result($res);
-mysqli_close($conex);
+
 ?>

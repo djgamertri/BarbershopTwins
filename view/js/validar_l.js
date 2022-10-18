@@ -33,5 +33,5 @@ function validar(){
         mensaje.innerHTML = warning
         return false
     }
-    
+
 }
