@@ -2,8 +2,6 @@
 
 session_start();
 
-include("../controller/db.php");
-
 if(!isset($_SESSION["id_rol"])){
     header("location: index.php");
 }
@@ -21,6 +19,7 @@ if(!isset($_SESSION["cart"])){
     header("location: ../view/productos.php");
 }
 
+include_once "../controller/Auxiliares.php";
 
 ?>
 
@@ -138,7 +137,7 @@ if(!isset($_SESSION["cart"])){
                 <br>
             </div>
             <div class="acciones">
-                <a class="Quit" href="../controller/c6.php?cart=null" data-id=" <?php echo $carrito[$i]["id"] ?> " > Vaciar carrito </a>
+                <a class="Quit" href="../controller/Carrito.php?cart=null" data-id=" <?php echo $carrito[$i]["id"] ?> " > Vaciar carrito </a>
                 <br>
                 <?php 
                 if(!isset($_SESSION["fecha"])){
@@ -147,20 +146,14 @@ if(!isset($_SESSION["cart"])){
                     <input type="date" name="fecha" class="date" id="fecha" required onchange="obetenerfecha()" min="<?php echo date("Y-m-d") ?>" max="2025-03-01">
                     <select name="Hora" id="horario" class="horario" required ></select>
                     
-                    <?php
-                        $consulta = "SELECT * FROM usuario where id_rol = 2";
-                        $res = mysqli_query($conex, $consulta);
-
-                        $filas = mysqli_num_rows($res);
-                    ?>
 
                     <select name="auxiliar" id="auxiliar" class="N1" onchange="obetenerfecha()">
 
                     <?php
-                        if($filas > 0){
-                            while ($auxiliar = mysqli_fetch_array($res)){
+                        if(!empty($res)){
+                            for ($i=0; $i < count($res); $i++) { 
                     ?>
-                        <option value="<?php echo $auxiliar["id"];?>"> <?php echo $auxiliar["nombre"] ?> </option>
+                        <option value="<?php echo $res[$i]["id"];?>"> <?php echo $res[$i]["nombre"] ?> </option>
                     <?php
                             }
                         }

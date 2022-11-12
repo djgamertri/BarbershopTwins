@@ -26,9 +26,9 @@ if(isset($_SESSION["cart"])){
     $carrito = $_SESSION["cart"];
 
     for($i=0; $i<count($carrito); $i++){
-        $conex = mysqli_connect("127.0.0.1:3306", "root", "", "BarberShopTwins");
-        $insertar = mysqli_query($conex, "INSERT INTO reserva ( id_user, id_servicio, auxiliar, Fecha, Hora, Fecha_r) VALUES ( $id_user , ".$carrito[$i]["id"].", $auxiliar , '$fecha' , '$hora' , '$fecha_r'  )");
-        if($insertar){
+        include_once "../controller/reserva.php";
+        $res = $funcion -> Registrar( $id_user , $carrito[$i]["id"], $auxiliar , $fecha , $hora , $fecha_r  );
+        if($res == 1){
             unset($_SESSION["cart"]);
             unset($_SESSION["fecha"]);
         }

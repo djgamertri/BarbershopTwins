@@ -2,8 +2,6 @@
 
 session_start();
 
-include("../controller/db.php");
-
 if(!isset($_SESSION["id_rol"])){
     header("location: index.php");
 }
@@ -13,6 +11,9 @@ if(isset($_GET["cerrar_sesion"])){
     header("location: index.php");
     session_destroy();
 }
+
+include_once "../controller/reserva.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -39,6 +40,7 @@ if(isset($_GET["cerrar_sesion"])){
                 ?>
                 <li><a href="dashboard.php"><span><i class="las la-igloo"></i></span>dashboard</a></li>
                 <li><a href="usuarios.php"><span><i class="las la-user"></i></span>usuarios</a></li>
+                <li><a href="servicio.php" ><span><i class="las la-cut"></i></span>Servicios</a></li>
                 <li><a href="reservas.php" ><span><i class="las la-book"></i></span>reservas</a></li>
                 <?php
                     }
@@ -46,15 +48,6 @@ if(isset($_GET["cerrar_sesion"])){
                 ?>
                 <li><a href="#" class="active" ><span><i class="las la-book"></i></span>mis reservas</a></li>
                 <li><a href="index.php"><span><i class="las la-home"></i></span>Inicio</a></li>
-                <?php
-                if(!empty($_SESSION["id_rol"])){
-                    if($_SESSION["id_rol"] != 3){ 
-                ?>
-                <li><a href="" class="register_btn" ><span><i class="las la-user-plus"></i></span>Agregar Usuario</a></li>
-                <?php
-                    }
-                } 
-                ?>
                 <li><a href="?cerrar_sesion=1"><span><i class="las la-sign-out-alt"></i></span>Cerrar Sesion</a></li>
             </ul>
         </div>
@@ -98,31 +91,29 @@ if(isset($_GET["cerrar_sesion"])){
                 </tr>
                 <?php
 
-                $consulta= mysqli_query($conex, "SELECT r.id, u.nombre, s.nombre_s, r.Fecha, r.Hora FROM reserva r INNER join usuario u INNER join servicio s on u.id = r.id_user and s.id = r.id_servicio WHERE r.Estado = 1 AND u.id = $id ORDER BY u.nombre ASC");
-                $res = mysqli_num_rows($consulta);
+                $tabla_Reserva = $funcion -> ConsultaReserva($id);
 
-                if($res == true){
-                    while ($data = mysqli_fetch_array($consulta)){ 
+                if(!empty($tabla_Reserva)){
+                    for ($i=0; $i < count($tabla_Reserva); $i++) {  
                 ?>
                 <tr>
-                    <td> <?php echo $data["id"]?> </td>
-                    <td> <?php echo $data["nombre"]?> </td>
-                    <?php 
-                    $consultaA = mysqli_query($conex, "SELECT u.nombre FROM reserva r INNER join usuario u on u.id = r.auxiliar WHERE r.Estado = 1 AND r.id = ".$data["id"]." ORDER BY u.nombre ASC;");
-                    $auxiliar = mysqli_fetch_array($consultaA);
+                    <td> <?php echo $tabla_Reserva[$i]["id"]?> </td>
+                    <td> <?php echo $tabla_Reserva[$i]["nombre"]?> </td>
+                    <?php
+                    $aux = $funcion -> ConsultaAuxiliar($tabla_Reserva[$i]["id"]);
                     ?> 
-                    <td><?php echo $auxiliar["nombre"] ?></td>
-                    <td> <?php echo $data["nombre_s"]?> </td>
-                    <td> <?php echo $data["Fecha"]?> </td>
-                    <td> <?php if($data["Hora"] < 12){echo (int)(substr($data["Hora"], 0, 2))." AM";}else{echo (int)(substr($data["Hora"], 0, 2))." PM";} ?> </td>
+                    <td><?php echo $aux[0]["nombre"] ?></td>
+                    <td> <?php echo $tabla_Reserva[$i]["nombre_s"]?> </td>
+                    <td> <?php echo $tabla_Reserva[$i]["Fecha"]?> </td>
+                    <td> <?php if($tabla_Reserva[$i]["Hora"] < 12){echo (int)(substr($tabla_Reserva[$i]["Hora"], 0, 2))." AM";}else{echo (int)(substr($tabla_Reserva[$i]["Hora"], 0, 2))." PM";}?> </td>
                     <td>
-                        <a class="Delete" id="Delete" usuario="<?php echo $data["id"]?>" href="#">Cancelar</a>
+                        <a class="Delete" id="Delete" usuario="<?php echo $tabla_Reserva[$i]["id"]?>" href="#">Borrar</a>
                     </td>
                 </tr>
                 <?php
                     }
                 }else{
-                    echo "<h1 class='error' >No Cuentas con reservas Registradas</h1>";
+                    echo "<h1 class='error' >El usuario no cuenta con reservas Registradas</h1>";
                 }
                 ?>
             </table>

@@ -1,8 +1,8 @@
 <section class="modal_delete">
     <div class="contenedor_modal">
-        <a href="#" id="close_modal_d" class="modal_close">X</a>
+        <a href="#" id="close_modal_delete" class="modal_close">X</a>
         <br>
-        <form class="form" action="../controller/c4.php" method="POST" autocomplete="off">
+        <form class="form" action="../controller/Eliminar_usuario.php" method="POST" autocomplete="off">
             <h1>Eliminar Usuario</h1>
             <h2 class="confirm" >¿Estás seguro de querer eliminar a este usuario?</h2>
             <p class="parrafo" >Usuario: <span class="span" id="user_d"></span> </p>

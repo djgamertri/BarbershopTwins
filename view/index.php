@@ -178,6 +178,7 @@ if(isset($_GET["cerrar_sesion"])){
                 <p>Tv. 126b #132f18, Bogotá</p>
                 <p>barbershoptwins2@gmail.com</p>
                 <p>+57 301-380-0012</p>
+                <p><a href="https://docs.google.com/document/d/1y6la19oBG0lLV1DiElmS0wZvPTet3RZX/edit?usp=sharing&ouid=113530050506010659053&rtpof=true&sd=true">¿Necesitas ayuda?</a></p>
             </div>
         </div>
         <div class="links">
@@ -185,36 +186,12 @@ if(isset($_GET["cerrar_sesion"])){
         </div>
     </section>
 
-    <?php 
-    if(!empty($_SESSION["nombre"])){
-    ?>
-    <section class="modal_config">
-        <div class="contenedor_modal">
-        <a href="#" id="close_modal_config" class="modal_close">X</a>
-        <form class="form" action="../controller/c5.php" method="POST" autocomplete="off">
-            <h1>Perfil</h1>
-            <img src="<?php echo $_SESSION["imagen"]?>" alt="barbershop logo" class="logo_User">
-            <input type="hidden" required="[A-Za-z0-9_-]" name="id" value="<?php echo $_SESSION["id"] ?>" >
-            <input type="text" required="[A-Za-z0-9_-]" name="username" value="<?php echo $_SESSION["nombre"] ?>" placeholder="Nombre">
-            <input type="email" required="[A-Za-z0-9_-]" name="email" value="<?php echo $_SESSION["correo"] ?>" placeholder="Email">
-            <input type="password" required="[A-Za-z0-9_-]" name="password" value="" placeholder="Password">
-            <input type="submit" name="" value="Actualizar">
-            <?php 
-            if(!empty($_GET["Estado"])){
-                echo "<h1><span>Actualizado</span></h1>";
-            }        
-            ?>
-        </form>
-            <div id="warnings_r">
-                <p id="mensaje_r"></p>
-            </div>
-        </div>
-    </section>
     <?php
-    }
         if(empty($_SESSION["nombre"])){
             include_once "./assets/modal_register.php";
             include_once "./assets/modal_login.php";
+        }else{
+            include_once "./assets/modal_config.php";
         }
     ?>
     

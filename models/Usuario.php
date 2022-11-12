@@ -27,7 +27,7 @@ class Usuario{
             return $e;
         }
     }
-    function ConsultaRoles(){
+    function ConsultaRol(){
         try {
             include "db.php";
             $sentencia = $con -> prepare("call ConsultaRol(?)");
@@ -60,15 +60,45 @@ class Usuario{
             return $e;
         }
     }
+    function ConsultaEditar($id){
+        try {
+            include "db.php";
+            $sentencia = $con -> prepare("call ConsultaEditar(?)");
+            $sentencia -> bindparam(1,$id);
+            $sentencia -> execute();
+            return $sentencia -> fetchALL(PDO::FETCH_ASSOC);   
+        } catch(exception $e){
+            return $e;
+        }
+    }
+    function ConsultarAuxiliares(){
+        try {
+            include "db.php";
+            $sentencia = $con -> prepare("call ConsultarAuxiliares()");
+            $sentencia -> execute();
+            return $sentencia -> fetchALL(PDO::FETCH_ASSOC);   
+        } catch(exception $e){
+            return $e;
+        }
+    }
+    function ConsultaRoles(){
+        try {
+            include "db.php";
+            $sentencia = $con -> prepare("call ConsultaRoles()");
+            $sentencia -> execute();
+            return $sentencia -> fetchALL(PDO::FETCH_ASSOC);   
+        } catch(exception $e){
+            return $e;
+        }
+    }
     function ActualizarUsuario(){
         try {
             include "db.php";
-            $sentencia = $con -> prepare("call ActualizarUsuario(?,?,?,?,?)");
+            $sentencia = $con -> prepare("call ActualizarUsuario(?,?,?,?)");
             $sentencia -> bindparam(1,$_POST["id"]);
             $sentencia -> bindparam(2,$_POST["username"]);
             $sentencia -> bindparam(3,$_POST["email"]);
-            $sentencia -> bindparam(4,md5($_POST["password"]));
-            $sentencia -> bindparam(5,$_POST["Rol"]);
+            $sentencia -> bindparam(4,$_POST["Rol"]);
             $sentencia -> execute();
             return 1;
         } catch(exception $e){
@@ -85,6 +115,17 @@ class Usuario{
             $sentencia -> bindparam(4,md5($_POST["password"]));
             $sentencia -> execute();
             return 1;
+        } catch(exception $e){
+            return $e;
+        }
+    }
+    function EliminarUsuario($id){
+        try {
+            include "db.php";
+            $sentencia = $con -> prepare("call EliminarUsuario(?)");
+            $sentencia -> bindparam(1,$id);
+            $sentencia -> execute();
+            return 1;   
         } catch(exception $e){
             return $e;
         }

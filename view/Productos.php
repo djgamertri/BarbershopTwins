@@ -2,8 +2,6 @@
 
 session_start();
 
-include("../controller/db.php");
-
 if(!isset($_SESSION["id_rol"])){
     header("location: index.php");
 }
@@ -12,6 +10,8 @@ if(isset($_GET["cerrar_sesion"])){
     header("location: index.php");
     session_destroy();
 }
+
+include_once "../controller/servicio.php";
 
 ?>
 
@@ -103,22 +103,21 @@ if(isset($_GET["cerrar_sesion"])){
             $carrito = $_SESSION["cart"];
             }
             
-            $consulta= mysqli_query($conex, "SELECT * FROM servicio");
-            $res = mysqli_num_rows($consulta);
+           
 
-            if($res == true){
-                while ($data = mysqli_fetch_array($consulta)){
+            if(!empty($res)){
+                for ($i=0; $i < count($res); $i++) { 
             ?>
                 <div class="service">
-                    <form action="../controller/c6.php?id=<?php echo $data["id"] ?>" method="POST" class="servicio">
-                        <h1><?php echo $data["nombre_s"] ?></h1>
-                        <p><?php echo $data["descripcion"] ?></p>
-                        <p class="precio"><?php echo number_format($data["precio"]) ?></p>
+                    <form action="../controller/Carrito.php?id=<?php echo $res[$i]["id"] ?>" method="POST" class="servicio">
+                        <h1><?php echo $res[$i]["nombre_s"] ?></h1>
+                        <p><?php echo $res[$i]["descripcion"] ?></p>
+                        <p class="precio"><?php echo number_format($res[$i]["precio"]) ?></p>
 
-                        <input type="hidden" required="[A-Za-z0-9_-]" name="id" value="<?php echo $data["id"] ?>">
-                        <input type="hidden" required="[A-Za-z0-9_-]" name="nombre" value="<?php echo $data["nombre_s"] ?>">
-                        <input type="hidden" required="[A-Za-z0-9_-]" name="descripcion" value="<?php echo $data["descripcion"] ?>">
-                        <input type="hidden" required="[A-Za-z0-9_-]" name="precio" value="<?php echo $data["precio"] ?>">
+                        <input type="hidden" required="[A-Za-z0-9_-]" name="id" value="<?php echo $res[$i]["id"] ?>">
+                        <input type="hidden" required="[A-Za-z0-9_-]" name="nombre" value="<?php echo $res[$i]["nombre_s"] ?>">
+                        <input type="hidden" required="[A-Za-z0-9_-]" name="descripcion" value="<?php echo $res[$i]["descripcion"] ?>">
+                        <input type="hidden" required="[A-Za-z0-9_-]" name="precio" value="<?php echo $res[$i]["precio"] ?>">
                         <input type="submit" name="" value="Añadir al Carrito">
                     </form>
                 </div>
@@ -127,28 +126,11 @@ if(isset($_GET["cerrar_sesion"])){
             }
             ?>
 
-        <section class="modal_config">
-            <div class="contenedor_modal">
-            <a href="#" id="close_modal_config" class="modal_close">X</a>
-            <form class="form" action="../controller/c5.php" method="POST" autocomplete="off">
-                <h1>Perfil</h1>
-                <img src="<?php echo $_SESSION["imagen"]?>" alt="barbershop logo" class="logo_User">
-                <input type="hidden" required="[A-Za-z0-9_-]" name="id" value="<?php echo $_SESSION["id"] ?>" >
-                <input type="text" required="[A-Za-z0-9_-]" name="username" value="<?php echo $_SESSION["nombre"] ?>" placeholder="Nombre">
-                <input type="email" required="[A-Za-z0-9_-]" name="email" value="<?php echo $_SESSION["correo"] ?>" placeholder="Email">
-                <input type="password" required="[A-Za-z0-9_-]" name="password" value="" placeholder="Password">
-                <input type="submit" name="" value="Actualizar">
-                <?php 
-                if(!empty($_GET["Estado"])){
-                    echo "<h1><span>Actualizado</span></h1>";
-                }        
-                ?>
-            </form>
-                <div id="warnings_r">
-                    <p id="mensaje_r"></p>
-                </div>
-            </div>
-        </section>
+            <?php 
+            
+            include_once "./assets/modal_config.php";
+            
+            ?>
 
         </main>
 

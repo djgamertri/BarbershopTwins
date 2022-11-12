@@ -140,6 +140,21 @@ main h1{
     text-align: center;
     margin-bottom: 10px;
 }
+.content-botones a{
+    top: 0;
+    background: var(--color_p);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 100px;
+    padding: 10px;
+}
+.content-botones{
+    align-items: center;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
 table{
     border-collapse: collapse; 
     font-size: 16px;

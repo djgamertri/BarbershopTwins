@@ -2,8 +2,6 @@
 
 session_start();
 
-include("../controller/db.php");
-
 if(!isset($_SESSION["id_rol"])){
     header("location: index.php");
 }
@@ -18,6 +16,8 @@ if(isset($_GET["cerrar_sesion"])){
     header("location: index.php");
     session_destroy();
 }
+
+include_once "../controller/tabla_usuario.php";
 
 ?>
 
@@ -41,10 +41,10 @@ if(isset($_GET["cerrar_sesion"])){
             <ul>
                 <li><a href="dashboard.php"><span><i class="las la-igloo"></i></span>dashboard</a></li>
                 <li><a href="#" class="active" ><span><i class="las la-user"></i></span>usuarios</a></li>
+                <li><a href="servicio.php" ><span><i class="las la-cut"></i></span>Servicios</a></li>
                 <li><a href="reservas.php"><span><i class="las la-book"></i></span>reservas</a></li>
                 <li><a href="mis_reservas.php"><span><i class="las la-book"></i></span>Mis reservas</a></li>
                 <li><a href="index.php"><span><i class="las la-home"></i></span>Inicio</a></li>
-                <li><a href="" class="register_btn" ><span><i class="las la-user-plus"></i></span>Agregar Usuario</a></li>
                 <li><a href="?cerrar_sesion=1"><span><i class="las la-sign-out-alt"></i></span>Cerrar Sesion</a></li>
             </ul>
         </div>
@@ -53,7 +53,7 @@ if(isset($_GET["cerrar_sesion"])){
         <header id="header">
             <h2>
                 <label for="" id="btn"><span><i class="las la-bars"></i></span></label>
-                Dashboard
+                Usuarios
             </h2>
 
             <h2>
@@ -69,7 +69,21 @@ if(isset($_GET["cerrar_sesion"])){
             </div>
         </header>
         <main>
-            <h1>Usuarios</h1>
+            <div class="content-botones">
+                <a href="../controller/reports/ReporteU.php" class="botones"><span></span>REPORTE</a>
+                <h1>Usuarios</h1>
+                <?php 
+                if($_SESSION["id_rol"] != 3 and $_SESSION["id_rol"] != 2){
+                ?>
+                <a href="" class="register_btn" ><span></span>AÑADIR</a>
+                <?php
+                }else{
+                ?>
+                <br>
+                <?php
+                }
+                ?>
+            </div>
             <div class="table">
                 <table>
                     <tr>
@@ -81,23 +95,20 @@ if(isset($_GET["cerrar_sesion"])){
                     </tr>
                     <?php 
 
-                    $consulta= mysqli_query($conex, "SELECT u.id, u.nombre, u.correo, u.contraseña, u.id_rol, r.rol FROM usuario u INNER JOIN roles r ON u.id_rol = r.id WHERE Estado = 1");
-                    $res = mysqli_num_rows($consulta);
-
-                    if($res == true){
-                        while ($data = mysqli_fetch_array($consulta)){
+                    if(!empty($res)){
+                       for ($i=0; $i < count($res); $i++) { 
                     ?>
                     <tr>
-                        <td><?php echo $data["id"]?></td>
-                        <td><?php echo $data["nombre"]?></td>
-                        <td><?php echo $data["correo"]?></td>
-                        <td><?php echo $data["rol"]?></td>
-                        <td><a class="Edit" id="Edit" usuario="<?php echo $data["id"]?>" href="#">Editar</a>
+                        <td><?php echo $res[$i]["id"]?></td>
+                        <td><?php echo $res[$i]["nombre"]?></td>
+                        <td><?php echo $res[$i]["correo"]?></td>
+                        <td><?php echo $res[$i]["rol"]?></td>
+                        <td><a class="Edit" id="Edit" usuario="<?php echo $res[$i]["id"]?>" href="#">Editar</a>
                         <?php
-                        if($data["id"] != 1){
+                        if($res[$i]["id"] != 1){
                         ?>
                         |
-                        <a class="Delete" id="Delete" usuario="<?php echo $data["id"]?>" href="#">Borrar</a>
+                        <a class="Delete" id="Delete" usuario="<?php echo $res[$i]["id"]?>" href="#">Borrar</a>
                         <?php
                         }
                         }

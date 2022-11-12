@@ -15,9 +15,9 @@ var nombre_servicio = document.getElementById("nombre_servicio");
             XHR.onreadystatechange = function(){
                var dato = JSON.parse(XHR.responseText);
                dato.forEach( dato => {
-                id_servicio.value = dato.id_user;
+                id_servicio.value = dato.id;
                 user_servicio.innerText = dato.nombre;
-                nombre_servicio.innerText = dato.servicio;
+                nombre_servicio.innerText = dato.nombre_s;
                });
             }
             XHR.send("id_user=" + usuario);

@@ -2,8 +2,6 @@
 
 session_start();
 
-include("../controller/db.php");
-
 if(!isset($_SESSION["id_rol"])){
     header("location: index.php");
 }
@@ -18,6 +16,10 @@ if(isset($_GET["cerrar_sesion"])){
     header("location: index.php");
     session_destroy();
 }
+
+include_once "../controller/tabla_usuario.php";
+include_once "../controller/reserva.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -40,10 +42,10 @@ if(isset($_GET["cerrar_sesion"])){
             <ul>
                 <li><a href="dashboard.php"><span><i class="las la-igloo"></i></span>dashboard</a></li>
                 <li><a href="usuarios.php"><span><i class="las la-user"></i></span>usuarios</a></li>
+                <li><a href="servicio.php" ><span><i class="las la-cut"></i></span>Servicios</a></li>
                 <li><a href="#" class="active" ><span><i class="las la-book"></i></span>reservas</a></li>
                 <li><a href="mis_reservas.php"><span><i class="las la-book"></i></span>Mis reservas</a></li>
                 <li><a href="index.php"><span><i class="las la-home"></i></span>Inicio</a></li>
-                <li><a href="" class="register_btn" ><span><i class="las la-user-plus"></i></span>Agregar Usuario</a></li>
                 <li><a href="?cerrar_sesion=1"><span><i class="las la-sign-out-alt"></i></span>Cerrar Sesion</a></li>
             </ul>
         </div>
@@ -52,7 +54,7 @@ if(isset($_GET["cerrar_sesion"])){
         <header id="header">
             <h2>
                 <label for="" id="btn"><span><i class="las la-bars"></i></span></label>
-                Dashboard
+                Reservas
             </h2>
 
             <h2>
@@ -72,7 +74,11 @@ if(isset($_GET["cerrar_sesion"])){
         if(empty($_GET["id"])){
             
         ?>
-        <h1>Consulta de reservas</h1>
+        <div class="content-botones">
+                <a href="../controller/reports/ReporteR.php" class="botones"><span></span>REPORTE</a>
+                <h1>Consulta de reservas</h1>
+                <br>
+            </div>
         <div class="table">
             <table>
                 <tr>
@@ -82,19 +88,15 @@ if(isset($_GET["cerrar_sesion"])){
                     <th>Acciones</th>
                 </tr>
                 <?php
-
-                $consulta= mysqli_query($conex, "SELECT u.id, u.nombre, u.correo, u.contraseña, u.id_rol, r.rol FROM usuario u INNER JOIN roles r ON u.id_rol = r.id WHERE Estado = 1");
-                $res = mysqli_num_rows($consulta);
-
-                if($res == true){
-                    while ($data = mysqli_fetch_array($consulta)){ 
+                if(!empty($res)){
+                    for ($i=0; $i < count($res); $i++) { 
                 ?>
                 <tr>
-                    <td><?php echo $data["id"]?></td>
-                    <td><?php echo $data["nombre"]?></td>
-                    <td><?php echo $data["correo"]?></td>
+                    <td><?php echo $res[$i]["id"]?></td>
+                    <td><?php echo $res[$i]["nombre"]?></td>
+                    <td><?php echo $res[$i]["correo"]?></td>
                     <td>
-                        <a class="reserva" href="reservas.php?id=<?php echo $data["id"]?>">Reservas</a>
+                        <a class="reserva" href="reservas.php?id=<?php echo $res[$i]["id"]?>">Reservas</a>
                     </td>
                 </tr>
                 <?php
@@ -110,6 +112,7 @@ if(isset($_GET["cerrar_sesion"])){
         <?php
         if(!empty($_GET["id"])){
             $id = $_GET["id"];
+            $tabla_Reserva = $funcion -> ConsultaReserva($id);
         ?>
         
         <h1>Consulta de reservas</h1>
@@ -126,25 +129,21 @@ if(isset($_GET["cerrar_sesion"])){
                 </tr>
                 <?php
 
-                $consulta= mysqli_query($conex, "SELECT r.id, u.nombre, s.nombre_s, r.Fecha, r.Hora FROM reserva r INNER join usuario u INNER join servicio s on u.id = r.id_user and s.id = r.id_servicio WHERE r.Estado = 1 AND u.id = $id ORDER BY u.nombre ASC");
-                $res = mysqli_num_rows($consulta);
-
-                if($res == true){
-                    while ($data = mysqli_fetch_array($consulta)){ 
+                if(!empty($tabla_Reserva)){
+                    for ($i=0; $i < count($tabla_Reserva); $i++) {  
                 ?>
                 <tr>
-                    <td> <?php echo $data["id"]?> </td>
-                    <td> <?php echo $data["nombre"]?> </td>
-                    <?php 
-                    $consultaA = mysqli_query($conex, "SELECT u.nombre FROM reserva r INNER join usuario u on u.id = r.auxiliar WHERE r.Estado = 1 AND r.id = ".$data["id"]." ORDER BY u.nombre ASC;");
-                    $auxiliar = mysqli_fetch_array($consultaA);
+                    <td> <?php echo $tabla_Reserva[$i]["id"]?> </td>
+                    <td> <?php echo $tabla_Reserva[$i]["nombre"]?> </td>
+                    <?php
+                    $aux = $funcion -> ConsultaAuxiliar($tabla_Reserva[$i]["id"]);
                     ?> 
-                    <td><?php echo $auxiliar["nombre"] ?></td>
-                    <td> <?php echo $data["nombre_s"]?> </td>
-                    <td> <?php echo $data["Fecha"]?> </td>
-                    <td> <?php if($data["Hora"] < 12){echo (int)(substr($data["Hora"], 0, 2))." AM";}else{echo (int)(substr($data["Hora"], 0, 2))." PM";}?> </td>
+                    <td><?php echo $aux[0]["nombre"] ?></td>
+                    <td> <?php echo $tabla_Reserva[$i]["nombre_s"]?> </td>
+                    <td> <?php echo $tabla_Reserva[$i]["Fecha"]?> </td>
+                    <td> <?php if($tabla_Reserva[$i]["Hora"] < 12){echo (int)(substr($tabla_Reserva[$i]["Hora"], 0, 2))." AM";}else{echo (int)(substr($tabla_Reserva[$i]["Hora"], 0, 2))." PM";}?> </td>
                     <td>
-                        <a class="Delete" id="Delete" usuario="<?php echo $data["id"]?>" href="#">Borrar</a>
+                        <a class="Delete" id="Delete" usuario="<?php echo $tabla_Reserva[$i]["id"]?>" href="#">Borrar</a>
                     </td>
                 </tr>
                 <?php

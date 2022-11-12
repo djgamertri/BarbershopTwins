@@ -2,7 +2,6 @@
 
 session_start();
 
-include("../controller/db.php");
 
 if(!isset($_SESSION["id_rol"])){
     header("location: index.php");
@@ -18,6 +17,10 @@ if(isset($_GET["cerrar_sesion"])){
     header("location: index.php");
     session_destroy();
   }
+
+  $conex = mysqli_connect("127.0.0.1:3306", "root", "", "BarberShopTwins");
+//   $conex = mysqli_connect("localhost", "id19752593_root", ")VO=Y#dmFUX@=9^3", "id19752593_babershop");
+
 
 ?>
 
@@ -41,10 +44,10 @@ if(isset($_GET["cerrar_sesion"])){
             <ul>
                 <li><a href="#" class="active" ><span><i class="las la-igloo"></i></span>dashboard</a></li>
                 <li><a href="usuarios.php"><span><i class="las la-user"></i></span>usuarios</a></li>
+                <li><a href="servicio.php" ><span><i class="las la-cut"></i></span>Servicios</a></li>
                 <li><a href="reservas.php"><span><i class="las la-book"></i></span>reservas</a></li>
                 <li><a href="mis_reservas.php"><span><i class="las la-book"></i></span>Mis reservas</a></li>
                 <li><a href="index.php"><span><i class="las la-home"></i></span>Inicio</a></li>
-                <li><a href="" class="register_btn" ><span><i class="las la-user-plus"></i></span>Agregar Usuario</a></li>
                 <li><a href="?cerrar_sesion=1"><span><i class="las la-sign-out-alt"></i></span>Cerrar Sesion</a></li>
             </ul>
         </div>

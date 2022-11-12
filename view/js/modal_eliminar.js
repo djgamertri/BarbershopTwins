@@ -1,6 +1,6 @@
 var abrir_modal_d = document.querySelectorAll("#Delete");
 var modal_d = document.querySelector(".modal_delete");
-var cerrar_modal_d = document.getElementById("close_modal_d");
+var cerrar_modal_d = document.getElementById("close_modal_delete");
 var id_user_d = document.getElementById("id_d");
 var user_d = document.getElementById("user_d");
 var email_d = document.getElementById("email_d");
@@ -16,10 +16,10 @@ var opcion_d = document.getElementById("rol_d");
             XHR.onreadystatechange = function(){
                var dato = JSON.parse(XHR.responseText);
                dato.forEach( dato => {
-                id_user_d.value = dato.id_user_d;
-                user_d.innerText = dato.nombre_d;
-                email_d.innerText = dato.correo_d;
-                opcion_d.innerText = dato.rol_d;
+                id_user_d.value = dato.id;
+                user_d.innerText = dato.nombre;
+                email_d.innerText = dato.correo;
+                opcion_d.innerText = dato.rol;
                });
             }
             XHR.send("id_delete=" + usuario);

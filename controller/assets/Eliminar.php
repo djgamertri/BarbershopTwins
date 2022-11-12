@@ -1,32 +1,20 @@
 <?php
 
-$id_user = $_POST["id_delete"];
+include_once "../../models/Usuario.php";
 
-if(!empty($id_user)){
-    $conex = mysqli_connect("127.0.0.1:3306", "root", "", "BarberShopTwins");
+$funcion = new Usuario();
 
-    $consulta = "SELECT u.id, u.nombre, u.correo, u.id_rol, r.rol FROM usuario u INNER JOIN roles r ON u.id_rol = r.id WHERE u.id = $id_user";
-    $res = mysqli_query($conex, $consulta);
+$id = intval($_POST["id_delete"]);
 
-    $filas = mysqli_num_rows($res);
+if(gettype($id) === "integer"){
 
-    if($filas == true){
+    $res = $funcion -> ConsultaEditar($id);
 
-        $json = array();
-        while ($data = mysqli_fetch_array($res)) {
-            $json[] = array(
-                "id_user_d" => $data["id"],
-                "nombre_d" => $data["nombre"],
-                "correo_d" => $data["correo"],
-                "idrol_d" => $data["id_rol"],
-                "rol_d" => $data["rol"]
-            );
-            
-        }
-    }
-    $jsonString = json_encode($json);
+    $jsonString = json_encode($res);
+    echo $jsonString;
+}else{
+    $jsonString = json_encode("No te hagas el listo :3");
     echo $jsonString;
 }
-else {
-    echo "error";
-}
+
+?>
